@@ -12,5 +12,8 @@
   },
   "1.1.1": {
     "en": "Added device capabilities to device dashboard"
+  },
+  "1.1.2": {
+    "en": "Bug fix"
   }
 }
