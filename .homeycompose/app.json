@@ -27,5 +27,11 @@
   "author": {
     "name": "Robert Coemans",
     "email": "r.coemans@hotmail.com"
+  },
+  "homepage": "https://github.com/rcoemans/com.volttime.chargers",
+  "support": "https://github.com/rcoemans/com.volttime.chargers/issues",
+  "source": "https://github.com/rcoemans/com.volttime.chargers",
+  "bugs": {
+    "url": "https://github.com/rcoemans/com.volttime.chargers/issues"
   }
 }
