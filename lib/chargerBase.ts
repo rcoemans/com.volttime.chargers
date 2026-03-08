@@ -4,6 +4,12 @@ import Homey from 'homey';
 import { VoltTimeApi, VoltTimeChargerStatus } from './api/voltTimeApi';
 
 const POWER_CHANGE_DEADBAND = 100; // W — minimum change to trigger power_changed
+const OCPP_201_CAPABILITIES = [
+  'measure_temperature',
+  'charging_profile_mode',
+  'plug_and_charge',
+  'charge_schedule_active',
+];
 
 export class ChargerBase extends Homey.Device {
   private api!: VoltTimeApi;
@@ -14,6 +20,9 @@ export class ChargerBase extends Homey.Device {
   private previousStatus: string = 'unknown';
   private previousChargeLimit: number = 0;
   private isCharging: boolean = false;
+  private wasSuspended: boolean = false;
+  private wasFaulted: boolean = false;
+  private targetEnergy: number = 0;
   private consecutiveFailures: number = 0;
   private lastSuccessfulUpdate: number = 0;
 
@@ -30,9 +39,10 @@ export class ChargerBase extends Homey.Device {
     this.registerCapabilityListener('onoff', this.onCapabilityOnoff.bind(this));
     this.registerCapabilityListener('target_charging_current', this.onCapabilityTargetChargingCurrent.bind(this));
 
+    await this.syncOcppCapabilities();
     this.startPolling();
 
-    this.log(`ChargerBase initialized for charger ${this.chargerId}, connector ${this.connectorId}`);
+    this.log(`ChargerBase initialized for charger ${this.chargerId}, connector ${this.connectorId}, OCPP ${this.getOcppVersion()}`);
   }
 
   async onSettings(event: { oldSettings: Record<string, unknown>; newSettings: Record<string, unknown>; changedKeys: string[] }): Promise<string | void> {
@@ -48,6 +58,12 @@ export class ChargerBase extends Homey.Device {
 
     if (event.changedKeys.includes('poll_interval_idle') || event.changedKeys.includes('poll_interval_charging')) {
       this.restartPolling();
+    }
+
+    if (event.changedKeys.includes('ocpp_version')) {
+      this.log(`OCPP version changed to ${event.newSettings.ocpp_version}`);
+      await this.syncOcppCapabilities();
+      await this.refreshState();
     }
   }
 
@@ -151,9 +167,28 @@ export class ChargerBase extends Homey.Device {
       await this.safeSetCapabilityValue('target_charging_current', status.current_limit);
     }
 
+    // Temperature (OCPP 2.0.1)
+    if (status.temperature !== undefined && status.temperature !== null) {
+      await this.safeSetCapabilityValue('measure_temperature', status.temperature);
+    }
+
     // Fault alarm
     const hasFault = chargerStatus === 'faulted';
     await this.safeSetCapabilityValue('alarm_fault', hasFault);
+
+    // Target energy auto-stop
+    if (this.targetEnergy > 0 && this.isCharging) {
+      const sessionEnergy = this.getCapabilityValue('meter_session_energy') || 0;
+      if (sessionEnergy >= this.targetEnergy) {
+        this.log(`Target energy ${this.targetEnergy} kWh reached (session: ${sessionEnergy} kWh), stopping charging`);
+        this.targetEnergy = 0;
+        try {
+          await this.onCapabilityOnoff(false);
+        } catch (err) {
+          this.error('Failed to auto-stop at target energy:', err);
+        }
+      }
+    }
 
     // Fire triggers
     await this.handleTriggers(chargerStatus, wasCharging, power, status);
@@ -209,13 +244,38 @@ export class ChargerBase extends Homey.Device {
     }
     this.previousStatus = chargerStatus;
 
+    // Charging paused (transition to suspended_ev or suspended_evse)
+    const isSuspended = chargerStatus === 'suspended_ev' || chargerStatus === 'suspended_evse';
+    if (isSuspended && !this.wasSuspended) {
+      const pauseReason = chargerStatus === 'suspended_ev' ? 'EV requested' : 'EVSE requested';
+      await this.homey.flow.getDeviceTriggerCard('charging_paused')
+        .trigger(this, { charger_name: deviceName, pause_reason: pauseReason })
+        .catch(this.error);
+    }
+
+    // Charging resumed (transition from suspended back to charging)
+    if (chargerStatus === 'charging' && this.wasSuspended) {
+      await this.homey.flow.getDeviceTriggerCard('charging_resumed')
+        .trigger(this, { charger_name: deviceName })
+        .catch(this.error);
+    }
+    this.wasSuspended = isSuspended;
+
     // Fault detected
-    if (chargerStatus === 'faulted' && this.previousStatus !== 'faulted') {
+    if (chargerStatus === 'faulted' && !this.wasFaulted) {
       const faultText = status.fault || 'Unknown fault';
       await this.homey.flow.getDeviceTriggerCard('fault_detected')
         .trigger(this, { fault_text: faultText })
         .catch(this.error);
     }
+
+    // Fault cleared
+    if (!chargerStatus.includes('faulted') && this.wasFaulted) {
+      await this.homey.flow.getDeviceTriggerCard('fault_cleared')
+        .trigger(this, { charger_name: deviceName })
+        .catch(this.error);
+    }
+    this.wasFaulted = chargerStatus === 'faulted';
 
     // Power changed (with deadband)
     if (Math.abs(power - this.previousPower) >= POWER_CHANGE_DEADBAND) {
@@ -292,6 +352,33 @@ export class ChargerBase extends Homey.Device {
     await this.onCapabilityTargetChargingCurrent(current - delta);
   }
 
+  async setTargetEnergyAction(value: number): Promise<void> {
+    this.targetEnergy = value;
+    this.log(`Target energy set to ${value} kWh (0 = disabled)`);
+  }
+
+  async setChargingProfileModeAction(mode: string): Promise<void> {
+    this.requireOcpp201('Set charging profile mode');
+    const limit = this.getCurrentLimit() || 32;
+    const purposeMap: Record<string, string> = {
+      'default': 'ChargePointMaxProfile',
+      'smart': 'TxDefaultProfile',
+      'scheduled': 'TxProfile',
+    };
+    const purpose = purposeMap[mode] || 'TxDefaultProfile';
+
+    if (mode === 'default') {
+      await this.api.clearChargingProfile(this.chargerId);
+    } else {
+      await this.api.setChargingProfile(this.chargerId, this.connectorId, purpose, limit);
+    }
+
+    await this.safeSetCapabilityValue('charging_profile_mode', mode);
+    await this.safeSetCapabilityValue('charge_schedule_active', mode !== 'default');
+    this.log(`Charging profile mode set to ${mode}`);
+    setTimeout(() => this.refreshState(), 2000);
+  }
+
   async refreshNowAction(): Promise<void> {
     await this.refreshState();
   }
@@ -323,6 +410,41 @@ export class ChargerBase extends Homey.Device {
 
   getCurrentLimit(): number {
     return this.getCapabilityValue('target_charging_current') || 0;
+  }
+
+  getOcppVersion(): string {
+    return (this.getSettings().ocpp_version as string) || '1.6J';
+  }
+
+  isOcpp201(): boolean {
+    return this.getOcppVersion() === '2.0.1';
+  }
+
+  isSmartChargingActive(): boolean {
+    return this.getCapabilityValue('charge_schedule_active') === true;
+  }
+
+  isChargerHealthOk(): boolean {
+    if (!this.hasFault()) {
+      const temp = this.getCapabilityValue('measure_temperature');
+      if (temp !== null && temp !== undefined) {
+        return temp < 80;
+      }
+      return true;
+    }
+    return false;
+  }
+
+  getTemperature(): number {
+    return this.getCapabilityValue('measure_temperature') || 0;
+  }
+
+  getSessionEnergy(): number {
+    return this.getCapabilityValue('meter_session_energy') || 0;
+  }
+
+  getVoltage(): number {
+    return this.getCapabilityValue('measure_voltage') || 0;
   }
 
   getApi(): VoltTimeApi {
@@ -380,6 +502,26 @@ export class ChargerBase extends Homey.Device {
       const message = err instanceof Error ? err.message : String(err);
       this.error(`Failed to set capability ${capability}: ${message}`);
     }
+  }
+
+  requireOcpp201(featureName: string): void {
+    if (!this.isOcpp201()) {
+      throw new Error(`${featureName} requires OCPP 2.0.1. Change the protocol version in device settings.`);
+    }
+  }
+
+  private async syncOcppCapabilities(): Promise<void> {
+    const is201 = this.isOcpp201();
+    for (const cap of OCPP_201_CAPABILITIES) {
+      if (is201 && !this.hasCapability(cap)) {
+        await this.addCapability(cap).catch((err) =>
+          this.error(`Failed to add capability ${cap}:`, err));
+      } else if (!is201 && this.hasCapability(cap)) {
+        await this.removeCapability(cap).catch((err) =>
+          this.error(`Failed to remove capability ${cap}:`, err));
+      }
+    }
+    this.log(`OCPP ${this.getOcppVersion()} capabilities synced`);
   }
 
   compareValue(actual: number, operator: string, target: number): boolean {

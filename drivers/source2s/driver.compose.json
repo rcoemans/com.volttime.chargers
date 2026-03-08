@@ -120,6 +120,23 @@
           "value": ""
         },
         {
+          "id": "ocpp_version",
+          "type": "dropdown",
+          "label": {
+            "en": "OCPP protocol version",
+            "nl": "OCPP-protocolversie"
+          },
+          "hint": {
+            "en": "Select the OCPP version your charger uses. OCPP 2.0.1 unlocks additional capabilities and flow cards. Default: OCPP 1.6J.",
+            "nl": "Selecteer de OCPP-versie die uw lader gebruikt. OCPP 2.0.1 ontgrendelt extra mogelijkheden en flow-kaarten. Standaard: OCPP 1.6J."
+          },
+          "value": "1.6J",
+          "values": [
+            { "id": "1.6J", "label": { "en": "OCPP 1.6J", "nl": "OCPP 1.6J" } },
+            { "id": "2.0.1", "label": { "en": "OCPP 2.0.1", "nl": "OCPP 2.0.1" } }
+          ]
+        },
+        {
           "id": "connector_id",
           "type": "number",
           "label": {

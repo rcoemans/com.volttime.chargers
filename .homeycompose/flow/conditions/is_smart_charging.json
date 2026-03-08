@@ -1,0 +1,18 @@
+{
+  "id": "is_smart_charging",
+  "title": {
+    "en": "Smart charging !{{is|is not}} active",
+    "nl": "Smart laden !{{is|is niet}} actief"
+  },
+  "hint": {
+    "en": "Checks if smart charging / a charging schedule is active. Requires OCPP 2.0.1 protocol version.",
+    "nl": "Controleert of smart laden / een laadschema actief is. Vereist OCPP 2.0.1-protocolversie."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

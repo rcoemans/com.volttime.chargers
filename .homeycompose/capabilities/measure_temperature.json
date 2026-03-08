@@ -1,0 +1,21 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Charger temperature",
+    "nl": "Ladertemperatuur"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/thermometer.svg",
+  "units": {
+    "en": "°C",
+    "nl": "°C"
+  },
+  "decimals": 1,
+  "insights": true,
+  "insightsTitle": {
+    "en": "Charger temperature",
+    "nl": "Ladertemperatuur"
+  }
+}

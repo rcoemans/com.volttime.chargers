@@ -10,10 +10,12 @@ Functies:
 - Totale geïmporteerde energie voor Homey Energy-integratie
 - Storingsdetectie en meldingen
 - Adaptieve polling: sneller tijdens laden, langzamer wanneer inactief
-- 10 apparaat-capabilities
-- 8 custom flow-triggerkaarten: laden gestart/gestopt, status gewijzigd, vermogen gewijzigd, storing gedetecteerd, voertuig verbonden/losgekoppeld, laadlimiet gewijzigd
-- 8 custom flow-conditiekaarten met inversie-ondersteuning (is/is niet): laadt, verbonden, heeft storing, is beschikbaar, status is, vermogen is, stroom is, laadlimiet is
-- 7 flow-actiekaarten: laden starten/stoppen/wisselen, stroomlimiet instellen/verhogen/verlagen, ladergegevens verversen
+- OCPP 1.6J en OCPP 2.0.1 protocolondersteuning (selecteerbaar in apparaatinstellingen)
+- OCPP 2.0.1 extra’s: ladertemperatuur, slimme laadprofielen, Plug & Charge (ISO 15118)
+- 10 basiscapabilities + 4 OCPP 2.0.1-capabilities (dynamisch toegevoegd/verwijderd)
+- 11 flow-triggerkaarten: laden gestart/gestopt/gepauzeerd/hervat, status gewijzigd, vermogen gewijzigd, storing gedetecteerd/opgelost, voertuig verbonden/losgekoppeld, laadlimiet gewijzigd
+- 13 flow-conditiekaarten met inversie-ondersteuning (is/is niet)
+- 9 flow-actiekaarten: laden starten/stoppen/wisselen, stroomlimiet instellen/verhogen/verlagen, doelenergie instellen, laadprofiel instellen, verversen
 - Volledig gelokaliseerd in Engels en Nederlands
 
 Ondersteunde apparaten:
@@ -59,6 +61,12 @@ Apparaatbediening:
 - Aan/Uit-knop ("Laden"): zet laden AAN om een Remote Start-opdracht naar de lader te sturen, of UIT om een Remote Stop-opdracht te sturen. Dit regelt de laadsessie, niet de hardware.
 - Laadstroomlimietschuif (6-32 A): stelt de maximale stroom in die de lader levert. Een lagere limiet vermindert laadsnelheid en vermogensonttrekking. Handig voor zonne-energie of netontlasting.
 
+OCPP-protocolversie:
+- Standaard: OCPP 1.6J (gebruikt bij eerste installatie van het apparaat)
+- OCPP 2.0.1 kan worden geselecteerd in apparaatinstellingen voor extra mogelijkheden en flow-kaarten
+- OCPP 2.0.1-capabilities (temperatuur, laadprofiel, Plug & Charge, smart laden) worden automatisch toegevoegd/verwijderd bij wijziging van de instelling
+- OCPP 2.0.1-only flow-kaarten tonen een foutmelding als het apparaat is ingesteld op OCPP 1.6J
+
 Flow-kaarten - Voorwaarden:
 - Lader laadt/laadt niet
 - Voertuig is/is niet verbonden
@@ -68,6 +76,11 @@ Flow-kaarten - Voorwaarden:
 - Vermogen is/is niet [operator] [waarde] W
 - Laadstroom is/is niet [operator] [waarde] A
 - Laadlimiet is/is niet [operator] [waarde] A
+- Spanning is/is niet [operator] [waarde] V
+- Sessie-energie is/is niet [operator] [waarde] kWh
+- Ladertemperatuur is/is niet [operator] [waarde] °C (OCPP 2.0.1)
+- Smart laden is/is niet actief (OCPP 2.0.1)
+- Ladergezondheid is/is niet OK
 
 Flow-kaarten - Acties:
 - Laden starten
@@ -76,6 +89,8 @@ Flow-kaarten - Acties:
 - Stroomlimiet instellen op [waarde] A
 - Stroomlimiet verhogen met [waarde] A
 - Stroomlimiet verlagen met [waarde] A
+- Laden stoppen na [waarde] kWh (doelenergie)
+- Laadprofielmodus instellen (OCPP 2.0.1): standaard / smart / gepland
 - Ladergegevens nu verversen
 
 Bekende beperkingen:

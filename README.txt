@@ -10,10 +10,12 @@ Features:
 - Total imported energy for Homey Energy integration
 - Fault detection and alerting
 - Adaptive polling: faster during charging, slower when idle
-- 10 device capabilities
-- 8 custom flow trigger cards: charging started/stopped, status changed, power changed, fault detected, vehicle connected/disconnected, charge limit changed
-- 8 custom flow condition cards with inversion support (is/is not): is charging, is connected, has fault, is available, status is, power is, current is, charge limit is
-- 7 flow action cards: start, stop, toggle charging, set/increase/decrease current limit, refresh charger data
+- OCPP 1.6J and OCPP 2.0.1 protocol support (selectable in device settings)
+- OCPP 2.0.1 extras: charger temperature, smart charging profiles, Plug & Charge (ISO 15118)
+- 10 base capabilities + 4 OCPP 2.0.1 capabilities (dynamically added/removed)
+- 11 flow trigger cards: charging started/stopped/paused/resumed, status changed, power changed, fault detected/cleared, vehicle connected/disconnected, charge limit changed
+- 13 flow condition cards with inversion support (is/is not)
+- 9 flow action cards: start/stop/toggle charging, set/increase/decrease current limit, set target energy, set charging profile, refresh
 - Fully localized in English and Dutch (Nederlands)
 
 Supported devices:
@@ -59,6 +61,12 @@ Device controls:
 - On/Off button ("Charging"): turns charging ON to send a Remote Start command to the charger, or OFF to send a Remote Stop command. This controls the charging session, not the hardware power.
 - Charging current limit slider (6-32 A): sets the maximum current the charger delivers. Lowering the limit reduces speed and power draw. Useful for solar surplus charging or avoiding grid overload.
 
+OCPP protocol version:
+- Default: OCPP 1.6J (used during initial device installation)
+- OCPP 2.0.1 can be selected in device settings to unlock extra capabilities and flow cards
+- OCPP 2.0.1 capabilities (temperature, charging profile, Plug & Charge, smart charging) are automatically added/removed when you change the setting
+- OCPP 2.0.1-only flow cards will show an error if the device is set to OCPP 1.6J
+
 Flow cards - Conditions:
 - Charger is/is not charging
 - Vehicle is/is not connected
@@ -68,6 +76,11 @@ Flow cards - Conditions:
 - Power is/is not [operator] [value] W
 - Charging current is/is not [operator] [value] A
 - Charge limit is/is not [operator] [value] A
+- Voltage is/is not [operator] [value] V
+- Session energy is/is not [operator] [value] kWh
+- Charger temperature is/is not [operator] [value] °C (OCPP 2.0.1)
+- Smart charging is/is not active (OCPP 2.0.1)
+- Charger health is/is not OK
 
 Flow cards - Actions:
 - Start charging
@@ -76,6 +89,8 @@ Flow cards - Actions:
 - Set current limit to [value] A
 - Increase current limit by [value] A
 - Decrease current limit by [value] A
+- Stop charging after [value] kWh (target energy)
+- Set charging profile mode (OCPP 2.0.1): default / smart / scheduled
 - Refresh charger data now
 
 Known limitations:

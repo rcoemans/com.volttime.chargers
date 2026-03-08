@@ -1,0 +1,33 @@
+{
+  "id": "set_target_energy",
+  "title": {
+    "en": "Set target energy",
+    "nl": "Stel doelenergie in"
+  },
+  "titleFormatted": {
+    "en": "Stop charging after [[value]] kWh",
+    "nl": "Stop laden na [[value]] kWh"
+  },
+  "hint": {
+    "en": "Stops charging automatically when the session energy reaches the target. Set to 0 to disable. Requires OCPP 2.0.1 protocol version for best accuracy.",
+    "nl": "Stopt het laden automatisch wanneer de sessie-energie het doel bereikt. Stel in op 0 om uit te schakelen. Vereist OCPP 2.0.1-protocolversie voor de beste nauwkeurigheid."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    },
+    {
+      "type": "number",
+      "name": "value",
+      "title": {
+        "en": "Target energy (kWh)",
+        "nl": "Doelenergie (kWh)"
+      },
+      "min": 0,
+      "max": 100,
+      "step": 0.5
+    }
+  ]
+}

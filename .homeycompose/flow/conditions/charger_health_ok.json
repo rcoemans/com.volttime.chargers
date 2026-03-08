@@ -1,0 +1,18 @@
+{
+  "id": "charger_health_ok",
+  "title": {
+    "en": "Charger health !{{is|is not}} OK",
+    "nl": "Ladergezondheid !{{is|is niet}} OK"
+  },
+  "hint": {
+    "en": "Checks if the charger has no faults and temperature is within safe range. Requires OCPP 2.0.1 protocol version for full diagnostics.",
+    "nl": "Controleert of de lader geen storingen heeft en de temperatuur binnen een veilig bereik ligt. Vereist OCPP 2.0.1-protocolversie voor volledige diagnostiek."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

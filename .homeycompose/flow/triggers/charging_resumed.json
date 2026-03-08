@@ -1,0 +1,35 @@
+{
+  "id": "charging_resumed",
+  "title": {
+    "en": "Charging resumed",
+    "nl": "Laden hervat"
+  },
+  "titleFormatted": {
+    "en": "Charging resumed",
+    "nl": "Laden hervat"
+  },
+  "hint": {
+    "en": "Fires when a paused charging session resumes.",
+    "nl": "Wordt geactiveerd wanneer een gepauzeerde laadsessie wordt hervat."
+  },
+  "tokens": [
+    {
+      "name": "charger_name",
+      "type": "string",
+      "title": {
+        "en": "Charger name",
+        "nl": "Laadpuntnaam"
+      },
+      "example": {
+        "en": "Driveway Charger"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

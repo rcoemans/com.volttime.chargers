@@ -1,0 +1,35 @@
+{
+  "id": "fault_cleared",
+  "title": {
+    "en": "Fault cleared",
+    "nl": "Storing opgelost"
+  },
+  "titleFormatted": {
+    "en": "Fault cleared",
+    "nl": "Storing opgelost"
+  },
+  "hint": {
+    "en": "Fires when a charger fault is resolved (OCPP 2.0.1: detailed fault clearing via NotifyEvent).",
+    "nl": "Wordt geactiveerd wanneer een laderstoring is opgelost (OCPP 2.0.1: gedetailleerde storingsopheffing via NotifyEvent)."
+  },
+  "tokens": [
+    {
+      "name": "charger_name",
+      "type": "string",
+      "title": {
+        "en": "Charger name",
+        "nl": "Laadpuntnaam"
+      },
+      "example": {
+        "en": "Driveway Charger"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

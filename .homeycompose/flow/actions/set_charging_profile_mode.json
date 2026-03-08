@@ -1,0 +1,35 @@
+{
+  "id": "set_charging_profile_mode",
+  "title": {
+    "en": "Set charging profile (OCPP 2.0.1)",
+    "nl": "Stel laadprofiel in (OCPP 2.0.1)"
+  },
+  "titleFormatted": {
+    "en": "Set charging profile to [[mode]]",
+    "nl": "Stel laadprofiel in op [[mode]]"
+  },
+  "hint": {
+    "en": "Sets the smart charging profile mode. Requires OCPP 2.0.1 protocol version.",
+    "nl": "Stelt de smart-laadprofielmodus in. Vereist OCPP 2.0.1-protocolversie."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    },
+    {
+      "type": "dropdown",
+      "name": "mode",
+      "title": {
+        "en": "Profile mode",
+        "nl": "Profielmodus"
+      },
+      "values": [
+        { "id": "default", "label": { "en": "Default (max power)", "nl": "Standaard (max vermogen)" } },
+        { "id": "smart", "label": { "en": "Smart (optimized)", "nl": "Smart (geoptimaliseerd)" } },
+        { "id": "scheduled", "label": { "en": "Scheduled", "nl": "Gepland" } }
+      ]
+    }
+  ]
+}

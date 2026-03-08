@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.volttime.chargers",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "compatibility": ">=10.0.0",
   "sdk": 3,
   "platforms": [
@@ -194,6 +194,87 @@
         ]
       },
       {
+        "id": "charging_paused",
+        "title": {
+          "en": "Charging paused",
+          "nl": "Laden gepauzeerd"
+        },
+        "titleFormatted": {
+          "en": "Charging paused",
+          "nl": "Laden gepauzeerd"
+        },
+        "hint": {
+          "en": "Fires when the EV or EVSE pauses an active charging session (OCPP 2.0.1: richer pause reason detection).",
+          "nl": "Wordt geactiveerd wanneer de EV of EVSE een actieve laadsessie pauzeert (OCPP 2.0.1: rijkere pauzeredendetectie)."
+        },
+        "tokens": [
+          {
+            "name": "charger_name",
+            "type": "string",
+            "title": {
+              "en": "Charger name",
+              "nl": "Laadpuntnaam"
+            },
+            "example": {
+              "en": "Driveway Charger"
+            }
+          },
+          {
+            "name": "pause_reason",
+            "type": "string",
+            "title": {
+              "en": "Pause reason",
+              "nl": "Pauzeereden"
+            },
+            "example": {
+              "en": "EV requested"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "charging_resumed",
+        "title": {
+          "en": "Charging resumed",
+          "nl": "Laden hervat"
+        },
+        "titleFormatted": {
+          "en": "Charging resumed",
+          "nl": "Laden hervat"
+        },
+        "hint": {
+          "en": "Fires when a paused charging session resumes.",
+          "nl": "Wordt geactiveerd wanneer een gepauzeerde laadsessie wordt hervat."
+        },
+        "tokens": [
+          {
+            "name": "charger_name",
+            "type": "string",
+            "title": {
+              "en": "Charger name",
+              "nl": "Laadpuntnaam"
+            },
+            "example": {
+              "en": "Driveway Charger"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
         "id": "charging_started",
         "title": {
           "en": "Charging started",
@@ -263,6 +344,41 @@
             },
             "example": {
               "en": "12.5"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "fault_cleared",
+        "title": {
+          "en": "Fault cleared",
+          "nl": "Storing opgelost"
+        },
+        "titleFormatted": {
+          "en": "Fault cleared",
+          "nl": "Storing opgelost"
+        },
+        "hint": {
+          "en": "Fires when a charger fault is resolved (OCPP 2.0.1: detailed fault clearing via NotifyEvent).",
+          "nl": "Wordt geactiveerd wanneer een laderstoring is opgelost (OCPP 2.0.1: gedetailleerde storingsopheffing via NotifyEvent)."
+        },
+        "tokens": [
+          {
+            "name": "charger_name",
+            "type": "string",
+            "title": {
+              "en": "Charger name",
+              "nl": "Laadpuntnaam"
+            },
+            "example": {
+              "en": "Driveway Charger"
             }
           }
         ],
@@ -429,6 +545,24 @@
         ]
       },
       {
+        "id": "charger_health_ok",
+        "title": {
+          "en": "Charger health !{{is|is not}} OK",
+          "nl": "Ladergezondheid !{{is|is niet}} OK"
+        },
+        "hint": {
+          "en": "Checks if the charger has no faults and temperature is within safe range. Requires OCPP 2.0.1 protocol version for full diagnostics.",
+          "nl": "Controleert of de lader geen storingen heeft en de temperatuur binnen een veilig bereik ligt. Vereist OCPP 2.0.1-protocolversie voor volledige diagnostiek."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
         "id": "current_is",
         "title": {
           "en": "Current comparison",
@@ -571,6 +705,24 @@
         ]
       },
       {
+        "id": "is_smart_charging",
+        "title": {
+          "en": "Smart charging !{{is|is not}} active",
+          "nl": "Smart laden !{{is|is niet}} actief"
+        },
+        "hint": {
+          "en": "Checks if smart charging / a charging schedule is active. Requires OCPP 2.0.1 protocol version.",
+          "nl": "Controleert of smart laden / een laadschema actief is. Vereist OCPP 2.0.1-protocolversie."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
         "id": "power_is",
         "title": {
           "en": "Power comparison",
@@ -637,6 +789,76 @@
             },
             "min": 0,
             "step": 100
+          }
+        ]
+      },
+      {
+        "id": "session_energy_is",
+        "title": {
+          "en": "Session energy comparison",
+          "nl": "Sessie-energie vergelijking"
+        },
+        "titleFormatted": {
+          "en": "Session energy !{{is|is not}} [[operator]] [[value]] kWh",
+          "nl": "Sessie-energie !{{is|is niet}} [[operator]] [[value]] kWh"
+        },
+        "hint": {
+          "en": "Checks if the current session energy matches the condition.",
+          "nl": "Controleert of de huidige sessie-energie voldoet aan de voorwaarde."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          },
+          {
+            "type": "dropdown",
+            "name": "operator",
+            "title": {
+              "en": "Operator",
+              "nl": "Operator"
+            },
+            "values": [
+              {
+                "id": "lt",
+                "label": {
+                  "en": "Less than",
+                  "nl": "Kleiner dan"
+                }
+              },
+              {
+                "id": "lte",
+                "label": {
+                  "en": "Less than or equal",
+                  "nl": "Kleiner dan of gelijk aan"
+                }
+              },
+              {
+                "id": "gt",
+                "label": {
+                  "en": "Greater than",
+                  "nl": "Groter dan"
+                }
+              },
+              {
+                "id": "gte",
+                "label": {
+                  "en": "Greater than or equal",
+                  "nl": "Groter dan of gelijk aan"
+                }
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "value",
+            "title": {
+              "en": "Value",
+              "nl": "Waarde"
+            },
+            "min": 0,
+            "step": 0.1
           }
         ]
       },
@@ -734,6 +956,147 @@
             ]
           }
         ]
+      },
+      {
+        "id": "temperature_is",
+        "title": {
+          "en": "Temperature comparison",
+          "nl": "Temperatuur vergelijking"
+        },
+        "titleFormatted": {
+          "en": "Charger temperature !{{is|is not}} [[operator]] [[value]] °C",
+          "nl": "Ladertemperatuur !{{is|is niet}} [[operator]] [[value]] °C"
+        },
+        "hint": {
+          "en": "Checks if the charger temperature matches the condition. Requires OCPP 2.0.1 protocol version.",
+          "nl": "Controleert of de ladertemperatuur voldoet aan de voorwaarde. Vereist OCPP 2.0.1-protocolversie."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          },
+          {
+            "type": "dropdown",
+            "name": "operator",
+            "title": {
+              "en": "Operator",
+              "nl": "Operator"
+            },
+            "values": [
+              {
+                "id": "lt",
+                "label": {
+                  "en": "Less than",
+                  "nl": "Kleiner dan"
+                }
+              },
+              {
+                "id": "lte",
+                "label": {
+                  "en": "Less than or equal",
+                  "nl": "Kleiner dan of gelijk aan"
+                }
+              },
+              {
+                "id": "gt",
+                "label": {
+                  "en": "Greater than",
+                  "nl": "Groter dan"
+                }
+              },
+              {
+                "id": "gte",
+                "label": {
+                  "en": "Greater than or equal",
+                  "nl": "Groter dan of gelijk aan"
+                }
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "value",
+            "title": {
+              "en": "Value",
+              "nl": "Waarde"
+            },
+            "min": -20,
+            "max": 120,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "voltage_is",
+        "title": {
+          "en": "Voltage comparison",
+          "nl": "Spanning vergelijking"
+        },
+        "titleFormatted": {
+          "en": "Voltage !{{is|is not}} [[operator]] [[value]] V",
+          "nl": "Spanning !{{is|is niet}} [[operator]] [[value]] V"
+        },
+        "hint": {
+          "en": "Checks if the live charging voltage matches the condition.",
+          "nl": "Controleert of de actuele laadspanning voldoet aan de voorwaarde."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          },
+          {
+            "type": "dropdown",
+            "name": "operator",
+            "title": {
+              "en": "Operator",
+              "nl": "Operator"
+            },
+            "values": [
+              {
+                "id": "lt",
+                "label": {
+                  "en": "Less than",
+                  "nl": "Kleiner dan"
+                }
+              },
+              {
+                "id": "lte",
+                "label": {
+                  "en": "Less than or equal",
+                  "nl": "Kleiner dan of gelijk aan"
+                }
+              },
+              {
+                "id": "gt",
+                "label": {
+                  "en": "Greater than",
+                  "nl": "Groter dan"
+                }
+              },
+              {
+                "id": "gte",
+                "label": {
+                  "en": "Greater than or equal",
+                  "nl": "Groter dan of gelijk aan"
+                }
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "value",
+            "title": {
+              "en": "Value",
+              "nl": "Waarde"
+            },
+            "min": 0,
+            "step": 1
+          }
+        ]
       }
     ],
     "actions": [
@@ -826,6 +1189,59 @@
         ]
       },
       {
+        "id": "set_charging_profile_mode",
+        "title": {
+          "en": "Set charging profile (OCPP 2.0.1)",
+          "nl": "Stel laadprofiel in (OCPP 2.0.1)"
+        },
+        "titleFormatted": {
+          "en": "Set charging profile to [[mode]]",
+          "nl": "Stel laadprofiel in op [[mode]]"
+        },
+        "hint": {
+          "en": "Sets the smart charging profile mode. Requires OCPP 2.0.1 protocol version.",
+          "nl": "Stelt de smart-laadprofielmodus in. Vereist OCPP 2.0.1-protocolversie."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          },
+          {
+            "type": "dropdown",
+            "name": "mode",
+            "title": {
+              "en": "Profile mode",
+              "nl": "Profielmodus"
+            },
+            "values": [
+              {
+                "id": "default",
+                "label": {
+                  "en": "Default (max power)",
+                  "nl": "Standaard (max vermogen)"
+                }
+              },
+              {
+                "id": "smart",
+                "label": {
+                  "en": "Smart (optimized)",
+                  "nl": "Smart (geoptimaliseerd)"
+                }
+              },
+              {
+                "id": "scheduled",
+                "label": {
+                  "en": "Scheduled",
+                  "nl": "Gepland"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
         "id": "set_current_limit",
         "title": {
           "en": "Set current limit",
@@ -855,6 +1271,39 @@
             "min": 6,
             "max": 32,
             "step": 1
+          }
+        ]
+      },
+      {
+        "id": "set_target_energy",
+        "title": {
+          "en": "Set target energy",
+          "nl": "Stel doelenergie in"
+        },
+        "titleFormatted": {
+          "en": "Stop charging after [[value]] kWh",
+          "nl": "Stop laden na [[value]] kWh"
+        },
+        "hint": {
+          "en": "Stops charging automatically when the session energy reaches the target. Set to 0 to disable. Requires OCPP 2.0.1 protocol version for best accuracy.",
+          "nl": "Stopt het laden automatisch wanneer de sessie-energie het doel bereikt. Stel in op 0 om uit te schakelen. Vereist OCPP 2.0.1-protocolversie voor de beste nauwkeurigheid."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          },
+          {
+            "type": "number",
+            "name": "value",
+            "title": {
+              "en": "Target energy (kWh)",
+              "nl": "Doelenergie (kWh)"
+            },
+            "min": 0,
+            "max": 100,
+            "step": 0.5
           }
         ]
       },
@@ -1049,6 +1498,35 @@
               "value": ""
             },
             {
+              "id": "ocpp_version",
+              "type": "dropdown",
+              "label": {
+                "en": "OCPP protocol version",
+                "nl": "OCPP-protocolversie"
+              },
+              "hint": {
+                "en": "Select the OCPP version your charger uses. OCPP 2.0.1 unlocks additional capabilities and flow cards. Default: OCPP 1.6J.",
+                "nl": "Selecteer de OCPP-versie die uw lader gebruikt. OCPP 2.0.1 ontgrendelt extra mogelijkheden en flow-kaarten. Standaard: OCPP 1.6J."
+              },
+              "value": "1.6J",
+              "values": [
+                {
+                  "id": "1.6J",
+                  "label": {
+                    "en": "OCPP 1.6J",
+                    "nl": "OCPP 1.6J"
+                  }
+                },
+                {
+                  "id": "2.0.1",
+                  "label": {
+                    "en": "OCPP 2.0.1",
+                    "nl": "OCPP 2.0.1"
+                  }
+                }
+              ]
+            },
+            {
               "id": "connector_id",
               "type": "number",
               "label": {
@@ -1128,6 +1606,27 @@
       "insightsTitleFalse": {
         "en": "No fault",
         "nl": "Geen storing"
+      }
+    },
+    "charge_schedule_active": {
+      "type": "boolean",
+      "title": {
+        "en": "Smart charging active",
+        "nl": "Smart laden actief"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "uiQuickAction": false,
+      "icon": "/assets/icons/efficiency.svg",
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Smart charging active",
+        "nl": "Smart laden actief"
+      },
+      "insightsTitleFalse": {
+        "en": "Smart charging inactive",
+        "nl": "Smart laden inactief"
       }
     },
     "charger_status": {
@@ -1213,6 +1712,40 @@
         }
       ]
     },
+    "charging_profile_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Charging profile",
+        "nl": "Laadprofiel"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/performance.svg",
+      "values": [
+        {
+          "id": "default",
+          "title": {
+            "en": "Default",
+            "nl": "Standaard"
+          }
+        },
+        {
+          "id": "smart",
+          "title": {
+            "en": "Smart",
+            "nl": "Smart"
+          }
+        },
+        {
+          "id": "scheduled",
+          "title": {
+            "en": "Scheduled",
+            "nl": "Gepland"
+          }
+        }
+      ]
+    },
     "connector_status": {
       "type": "enum",
       "title": {
@@ -1261,6 +1794,27 @@
         }
       ]
     },
+    "measure_temperature": {
+      "type": "number",
+      "title": {
+        "en": "Charger temperature",
+        "nl": "Ladertemperatuur"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/thermometer.svg",
+      "units": {
+        "en": "°C",
+        "nl": "°C"
+      },
+      "decimals": 1,
+      "insights": true,
+      "insightsTitle": {
+        "en": "Charger temperature",
+        "nl": "Ladertemperatuur"
+      }
+    },
     "meter_session_energy": {
       "type": "number",
       "title": {
@@ -1276,6 +1830,27 @@
         "nl": "kWh"
       },
       "decimals": 2
+    },
+    "plug_and_charge": {
+      "type": "boolean",
+      "title": {
+        "en": "Plug & Charge",
+        "nl": "Plug & Charge"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "uiQuickAction": false,
+      "icon": "/assets/icons/power.svg",
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Plug & Charge active",
+        "nl": "Plug & Charge actief"
+      },
+      "insightsTitleFalse": {
+        "en": "Plug & Charge inactive",
+        "nl": "Plug & Charge inactief"
+      }
     },
     "target_charging_current": {
       "type": "number",

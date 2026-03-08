@@ -1,0 +1,47 @@
+{
+  "id": "temperature_is",
+  "title": {
+    "en": "Temperature comparison",
+    "nl": "Temperatuur vergelijking"
+  },
+  "titleFormatted": {
+    "en": "Charger temperature !{{is|is not}} [[operator]] [[value]] °C",
+    "nl": "Ladertemperatuur !{{is|is niet}} [[operator]] [[value]] °C"
+  },
+  "hint": {
+    "en": "Checks if the charger temperature matches the condition. Requires OCPP 2.0.1 protocol version.",
+    "nl": "Controleert of de ladertemperatuur voldoet aan de voorwaarde. Vereist OCPP 2.0.1-protocolversie."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    },
+    {
+      "type": "dropdown",
+      "name": "operator",
+      "title": {
+        "en": "Operator",
+        "nl": "Operator"
+      },
+      "values": [
+        { "id": "lt", "label": { "en": "Less than", "nl": "Kleiner dan" } },
+        { "id": "lte", "label": { "en": "Less than or equal", "nl": "Kleiner dan of gelijk aan" } },
+        { "id": "gt", "label": { "en": "Greater than", "nl": "Groter dan" } },
+        { "id": "gte", "label": { "en": "Greater than or equal", "nl": "Groter dan of gelijk aan" } }
+      ]
+    },
+    {
+      "type": "number",
+      "name": "value",
+      "title": {
+        "en": "Value",
+        "nl": "Waarde"
+      },
+      "min": -20,
+      "max": 120,
+      "step": 1
+    }
+  ]
+}

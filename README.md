@@ -109,18 +109,24 @@ The **Charging current limit** slider (6–32 A) sets the maximum charging curre
 
 ### All device capabilities
 
-| Variable                   | Type    | Description                          | Indicator |
-|----------------------------|---------|--------------------------------------|:---------:|
-| `onoff`                    | boolean | Charging active — start/stop session | ✓         |
-| `measure_power`            | number  | Live charging power (W)              | ✓         |
-| `meter_power`              | number  | Total imported energy (kWh)          |           |
-| `measure_current`          | number  | Live charging current (A)            | ✓         |
-| `measure_voltage`          | number  | Live charging voltage (V)            | ✓         |
-| `charger_status`           | enum    | Charger status                       |           |
-| `connector_status`         | enum    | Connector / cable status             |           |
-| `alarm_fault`              | boolean | Charger fault active                 | ✓         |
-| `target_charging_current`  | number  | Charging current limit (A) — slider  |           |
-| `meter_session_energy`     | number  | Current session energy (kWh)         |           |
+| Variable                   | Type    | Description                          | OCPP    | Indicator |
+|----------------------------|---------|--------------------------------------|---------|:---------:|
+| `onoff`                    | boolean | Charging active — start/stop session | Both    | ✓         |
+| `measure_power`            | number  | Live charging power (W)              | Both    | ✓         |
+| `meter_power`              | number  | Total imported energy (kWh)          | Both    |           |
+| `measure_current`          | number  | Live charging current (A)            | Both    | ✓         |
+| `measure_voltage`          | number  | Live charging voltage (V)            | Both    | ✓         |
+| `charger_status`           | enum    | Charger status                       | Both    |           |
+| `connector_status`         | enum    | Connector / cable status             | Both    |           |
+| `alarm_fault`              | boolean | Charger fault active                 | Both    | ✓         |
+| `target_charging_current`  | number  | Charging current limit (A) — slider  | Both    |           |
+| `meter_session_energy`     | number  | Current session energy (kWh)         | Both    |           |
+| `measure_temperature`      | number  | Charger temperature (°C)             | 2.0.1   | ✓         |
+| `charging_profile_mode`    | enum    | Charging profile (default/smart/scheduled) | 2.0.1 |       |
+| `plug_and_charge`          | boolean | Plug & Charge (ISO 15118) active     | 2.0.1   |           |
+| `charge_schedule_active`   | boolean | Smart charging schedule active       | 2.0.1   |           |
+
+> **OCPP 2.0.1 capabilities** are automatically added when you select OCPP 2.0.1 in device settings, and removed when you switch back to OCPP 1.6J.
 
 ## Charger Status Values
 
@@ -140,41 +146,53 @@ The **Charging current limit** slider (6–32 A) sets the maximum charging curre
 
 ### Triggers (WHEN…)
 
-| Trigger                    | Description                                                              |
-|----------------------------|--------------------------------------------------------------------------|
-| Charging started           | Fires when a charging session starts. Provides charger name as token.    |
-| Charging stopped           | Fires when a charging session stops. Provides charger name and session energy. |
-| Charger status changed     | Fires when the charger status changes. Provides old and new status.      |
-| Power has changed          | Fires when charging power changes significantly (100 W deadband).        |
-| Fault detected             | Fires when the charger reports a fault.                                  |
-| Vehicle connected          | Fires when a vehicle is connected to the charger.                        |
-| Vehicle disconnected       | Fires when a vehicle is disconnected from the charger.                   |
-| Charge limit has changed   | Fires when the charging current limit changes.                           |
+| Trigger                    | OCPP  | Description                                                              |
+|----------------------------|-------|--------------------------------------------------------------------------|
+| Charging started           | Both  | Fires when a charging session starts. Provides charger name as token.    |
+| Charging stopped           | Both  | Fires when a charging session stops. Provides charger name and session energy. |
+| Charger status changed     | Both  | Fires when the charger status changes. Provides old and new status.      |
+| Power has changed          | Both  | Fires when charging power changes significantly (100 W deadband).        |
+| Fault detected             | Both  | Fires when the charger reports a fault.                                  |
+| Fault cleared              | Both  | Fires when a charger fault is resolved.                                  |
+| Vehicle connected          | Both  | Fires when a vehicle is connected to the charger.                        |
+| Vehicle disconnected       | Both  | Fires when a vehicle is disconnected from the charger.                   |
+| Charge limit has changed   | Both  | Fires when the charging current limit changes.                           |
+| Charging paused            | Both  | Fires when charging is paused by EV or EVSE. Provides pause reason.      |
+| Charging resumed           | Both  | Fires when a paused charging session resumes.                            |
 
 ### Conditions (AND…)
 
-| Condition                                         | Description                                                      |
-|---------------------------------------------------|------------------------------------------------------------------|
-| Charger is / is not charging                      | Checks if the charger is currently charging                      |
-| Vehicle is / is not connected                     | Checks if a vehicle is connected                                 |
-| Charger has / has no fault                        | Checks if the charger has an active fault                        |
-| Charger is / is not available                     | Checks if the charger is idle and ready for a new session        |
-| Charger status is / is not [status]               | Checks if the status matches a selected value                    |
-| Power is / is not [operator] [value] W            | Checks if the charging power matches the condition               |
-| Charging current is / is not [operator] [value] A | Checks if the live charging current matches the condition        |
-| Charge limit is / is not [operator] [value] A     | Checks if the configured current limit matches the condition     |
+| Condition                                               | OCPP  | Description                                                      |
+|---------------------------------------------------------|-------|------------------------------------------------------------------|
+| Charger is / is not charging                            | Both  | Checks if the charger is currently charging                      |
+| Vehicle is / is not connected                           | Both  | Checks if a vehicle is connected                                 |
+| Charger has / has no fault                              | Both  | Checks if the charger has an active fault                        |
+| Charger is / is not available                           | Both  | Checks if the charger is idle and ready for a new session        |
+| Charger status is / is not [status]                     | Both  | Checks if the status matches a selected value                    |
+| Power is / is not [operator] [value] W                  | Both  | Checks if the charging power matches the condition               |
+| Charging current is / is not [operator] [value] A       | Both  | Checks if the live charging current matches the condition        |
+| Charge limit is / is not [operator] [value] A           | Both  | Checks if the configured current limit matches the condition     |
+| Voltage is / is not [operator] [value] V                | Both  | Checks if the charging voltage matches the condition             |
+| Session energy is / is not [operator] [value] kWh       | Both  | Checks if the session energy matches the condition               |
+| Charger temperature is / is not [operator] [value] °C   | 2.0.1 | Checks if charger temperature matches the condition              |
+| Smart charging is / is not active                       | 2.0.1 | Checks if a smart charging profile is active                     |
+| Charger health is / is not OK                           | Both* | Checks no faults and temperature within safe range               |
+
+> \* `Charger health` works with both OCPP versions but provides richer diagnostics with OCPP 2.0.1 (temperature data).
 
 ### Actions (THEN…)
 
-| Action                                  | Description                                                        |
-|-----------------------------------------|--------------------------------------------------------------------|
-| Start charging                          | Starts a charging session on the charger                           |
-| Stop charging                           | Stops the current charging session                                 |
-| Toggle charging on/off                  | Starts if stopped, stops if active                                 |
-| Set current limit to [value] A          | Sets the charging current limit (6–32 A)                           |
-| Increase current limit by [value] A     | Increases the current limit by the given amount (max 32 A)         |
-| Decrease current limit by [value] A     | Decreases the current limit by the given amount (min 6 A)          |
-| Refresh charger data now                | Immediately refreshes all charger data from the API                |
+| Action                                  | OCPP  | Description                                                        |
+|-----------------------------------------|-------|--------------------------------------------------------------------|
+| Start charging                          | Both  | Starts a charging session on the charger                           |
+| Stop charging                           | Both  | Stops the current charging session                                 |
+| Toggle charging on/off                  | Both  | Starts if stopped, stops if active                                 |
+| Set current limit to [value] A          | Both  | Sets the charging current limit (6–32 A)                           |
+| Increase current limit by [value] A     | Both  | Increases the current limit by the given amount (max 32 A)         |
+| Decrease current limit by [value] A     | Both  | Decreases the current limit by the given amount (min 6 A)          |
+| Stop charging after [value] kWh         | Both  | Sets a session energy target; charging stops when reached          |
+| Set charging profile (OCPP 2.0.1)       | 2.0.1 | Sets the smart charging profile mode (default/smart/scheduled)     |
+| Refresh charger data now                | Both  | Immediately refreshes all charger data from the API                |
 
 ### Flow Card Variables (Tokens)
 
@@ -188,8 +206,12 @@ The **Charging current limit** slider (6–32 A) sets the maximum charging curre
 | Power has changed      | `power`          | number | Current power (W)          | 7400             |
 | Power has changed      | `previous_power` | number | Previous power (W)         | 3700             |
 | Fault detected         | `fault_text`     | string | Fault description          | Ground fault     |
+| Fault cleared          | `charger_name`   | string | Charger device name        | Driveway Charger |
 | Charge limit changed   | `new_limit`      | number | New limit (A)              | 16               |
 | Charge limit changed   | `previous_limit` | number | Previous limit (A)         | 32               |
+| Charging paused        | `charger_name`   | string | Charger device name        | Driveway Charger |
+| Charging paused        | `pause_reason`   | string | Pause reason               | EV requested     |
+| Charging resumed       | `charger_name`   | string | Charger device name        | Driveway Charger |
 
 ## Homey Energy
 
@@ -201,14 +223,34 @@ The charger integrates with Homey Energy by reporting:
 
 The device is marked as a cumulative energy device for accurate Energy dashboard reporting.
 
+## OCPP Protocol Version
+
+Volt Time chargers support both **OCPP 1.6J** and **OCPP 2.0.1**. The protocol version can be selected in device settings.
+
+| Feature                   | OCPP 1.6J            | OCPP 2.0.1                              |
+|---------------------------|----------------------|-----------------------------------------|
+| Core charging control     | ✓                    | ✓                                       |
+| Power / current / voltage | ✓                    | ✓                                       |
+| Energy tracking           | ✓                    | ✓                                       |
+| Charger temperature       | ✗                    | ✓ (via component variables)             |
+| Smart charging profiles   | Limited              | Advanced (multi-level)                  |
+| Plug & Charge (ISO 15118) | ✗                    | ✓                                       |
+| Diagnostics               | Basic                | Detailed (NotifyEvent)                  |
+
+- **Default**: OCPP 1.6J (used during initial device installation)
+- **Switching**: Go to device settings → OCPP protocol version → select 2.0.1
+- **Capabilities**: OCPP 2.0.1-only capabilities are automatically added or removed when you change the setting
+- **Flow cards**: OCPP 2.0.1-only flow cards will show an error if the device is set to OCPP 1.6J
+
 ## Device Settings
 
-| Setting                         | Default | Description                                        |
-|---------------------------------|---------|----------------------------------------------------|
-| Personal Access Token           | —       | Volt Time Cloud personal access token (required)   |
-| Connector ID                    | 1       | Connector number on the charger                    |
-| Polling interval (idle)         | 60 s    | How often to poll when not charging                |
-| Polling interval (charging)     | 10 s    | How often to poll during active charging           |
+| Setting                         | Default   | Description                                                |
+|---------------------------------|-----------|------------------------------------------------------------|
+| Personal Access Token           | —         | Volt Time Cloud personal access token (required)           |
+| OCPP protocol version           | 1.6J      | OCPP version your charger uses (1.6J or 2.0.1)            |
+| Connector ID                    | 1         | Connector number on the charger                            |
+| Polling interval (idle)         | 60 s      | How often to poll when not charging                        |
+| Polling interval (charging)     | 10 s      | How often to poll during active charging                   |
 
 ## Use Case Examples
 
@@ -255,9 +297,9 @@ com.volttime.chargers/
 ```
 
 Future expansion paths:
-- OCPP 1.6J / 2.0.1 protocol support
 - Additional Volt Time charger models
 - Smart charging algorithms (solar surplus, tariff optimization)
+- Local OCPP direct connection (without cloud)
 
 ## Known Limitations
 

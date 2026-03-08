@@ -1,0 +1,21 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Plug & Charge",
+    "nl": "Plug & Charge"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "uiQuickAction": false,
+  "icon": "/assets/icons/power.svg",
+  "insights": true,
+  "insightsTitleTrue": {
+    "en": "Plug & Charge active",
+    "nl": "Plug & Charge actief"
+  },
+  "insightsTitleFalse": {
+    "en": "Plug & Charge inactive",
+    "nl": "Plug & Charge inactief"
+  }
+}

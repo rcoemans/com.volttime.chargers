@@ -66,6 +66,7 @@ export interface VoltTimeChargerStatus {
   session_energy?: number;
   current_limit?: number;
   fault?: string;
+  temperature?: number;
 }
 
 export class VoltTimeApi {
@@ -216,6 +217,7 @@ export class VoltTimeApi {
 
     let energyTotal: number | undefined;
     let currentLimit: number | undefined;
+    let temperature: number | undefined;
 
     try {
       const meter = await this.getLatestMeterValue(chargerUuid, connectorId);
@@ -234,6 +236,12 @@ export class VoltTimeApi {
         const offered = parseFloat(offeredSample.value);
         if (!isNaN(offered)) currentLimit = offered;
       }
+
+      const tempSample = samples.find((s) => s.measurand === 'Temperature');
+      if (tempSample) {
+        const temp = parseFloat(tempSample.value);
+        if (!isNaN(temp)) temperature = temp;
+      }
     } catch {
       /* meter values are optional */
     }
@@ -246,6 +254,7 @@ export class VoltTimeApi {
       energy_total: energyTotal,
       current_limit: currentLimit,
       fault: charger?.error ?? undefined,
+      temperature,
     };
   }
 
@@ -265,6 +274,33 @@ export class VoltTimeApi {
       connector_id: connectorId,
       limit: current,
     });
+  }
+
+  async setChargingProfile(
+    chargerUuid: string,
+    connectorId: number,
+    profilePurpose: string,
+    limit: number,
+  ): Promise<void> {
+    await this.request('POST', `/api/v3/chargers/${chargerUuid}/actions/charging-profile`, {
+      connector_id: connectorId,
+      charging_profile: {
+        charging_profile_id: 1,
+        stack_level: 1,
+        charging_profile_purpose: profilePurpose,
+        charging_profile_kind: 'Absolute',
+        charging_schedule: {
+          charging_rate_unit: 'A',
+          charging_schedule_period: [
+            { start_period: 0, limit, number_phases: 3 },
+          ],
+        },
+      },
+    });
+  }
+
+  async clearChargingProfile(chargerUuid: string): Promise<void> {
+    await this.request('POST', `/api/v3/chargers/${chargerUuid}/actions/clear-charging-profile`, {});
   }
 
   async validateToken(): Promise<void> {

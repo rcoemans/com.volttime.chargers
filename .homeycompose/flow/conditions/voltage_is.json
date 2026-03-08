@@ -1,0 +1,46 @@
+{
+  "id": "voltage_is",
+  "title": {
+    "en": "Voltage comparison",
+    "nl": "Spanning vergelijking"
+  },
+  "titleFormatted": {
+    "en": "Voltage !{{is|is not}} [[operator]] [[value]] V",
+    "nl": "Spanning !{{is|is niet}} [[operator]] [[value]] V"
+  },
+  "hint": {
+    "en": "Checks if the live charging voltage matches the condition.",
+    "nl": "Controleert of de actuele laadspanning voldoet aan de voorwaarde."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    },
+    {
+      "type": "dropdown",
+      "name": "operator",
+      "title": {
+        "en": "Operator",
+        "nl": "Operator"
+      },
+      "values": [
+        { "id": "lt", "label": { "en": "Less than", "nl": "Kleiner dan" } },
+        { "id": "lte", "label": { "en": "Less than or equal", "nl": "Kleiner dan of gelijk aan" } },
+        { "id": "gt", "label": { "en": "Greater than", "nl": "Groter dan" } },
+        { "id": "gte", "label": { "en": "Greater than or equal", "nl": "Groter dan of gelijk aan" } }
+      ]
+    },
+    {
+      "type": "number",
+      "name": "value",
+      "title": {
+        "en": "Value",
+        "nl": "Waarde"
+      },
+      "min": 0,
+      "step": 1
+    }
+  ]
+}

@@ -57,6 +57,33 @@ module.exports = class VoltTimeChargersApp extends Homey.App {
         return args.device.compareValue(args.device.getCurrentLimit(), args.operator, args.value);
       });
 
+    this.homey.flow.getConditionCard('voltage_is')
+      .registerRunListener(async (args: { device: ChargerBase; operator: string; value: number }) => {
+        return args.device.compareValue(args.device.getVoltage(), args.operator, args.value);
+      });
+
+    this.homey.flow.getConditionCard('session_energy_is')
+      .registerRunListener(async (args: { device: ChargerBase; operator: string; value: number }) => {
+        return args.device.compareValue(args.device.getSessionEnergy(), args.operator, args.value);
+      });
+
+    this.homey.flow.getConditionCard('temperature_is')
+      .registerRunListener(async (args: { device: ChargerBase; operator: string; value: number }) => {
+        args.device.requireOcpp201('Temperature condition');
+        return args.device.compareValue(args.device.getTemperature(), args.operator, args.value);
+      });
+
+    this.homey.flow.getConditionCard('is_smart_charging')
+      .registerRunListener(async (args: { device: ChargerBase }) => {
+        args.device.requireOcpp201('Smart charging condition');
+        return args.device.isSmartChargingActive();
+      });
+
+    this.homey.flow.getConditionCard('charger_health_ok')
+      .registerRunListener(async (args: { device: ChargerBase }) => {
+        return args.device.isChargerHealthOk();
+      });
+
     // ── Action cards ──
 
     this.homey.flow.getActionCard('start_charging')
@@ -87,6 +114,16 @@ module.exports = class VoltTimeChargersApp extends Homey.App {
     this.homey.flow.getActionCard('decrease_current_limit')
       .registerRunListener(async (args: { device: ChargerBase; value: number }) => {
         await args.device.decreaseCurrentLimitAction(args.value);
+      });
+
+    this.homey.flow.getActionCard('set_target_energy')
+      .registerRunListener(async (args: { device: ChargerBase; value: number }) => {
+        await args.device.setTargetEnergyAction(args.value);
+      });
+
+    this.homey.flow.getActionCard('set_charging_profile_mode')
+      .registerRunListener(async (args: { device: ChargerBase; mode: string }) => {
+        await args.device.setChargingProfileModeAction(args.mode);
       });
 
     this.homey.flow.getActionCard('refresh_now')

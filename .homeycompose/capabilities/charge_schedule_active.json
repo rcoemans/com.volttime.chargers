@@ -1,0 +1,21 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Smart charging active",
+    "nl": "Smart laden actief"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "uiQuickAction": false,
+  "icon": "/assets/icons/efficiency.svg",
+  "insights": true,
+  "insightsTitleTrue": {
+    "en": "Smart charging active",
+    "nl": "Smart laden actief"
+  },
+  "insightsTitleFalse": {
+    "en": "Smart charging inactive",
+    "nl": "Smart laden inactief"
+  }
+}

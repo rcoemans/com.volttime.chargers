@@ -1,0 +1,34 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Charging profile",
+    "nl": "Laadprofiel"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/performance.svg",
+  "values": [
+    {
+      "id": "default",
+      "title": {
+        "en": "Default",
+        "nl": "Standaard"
+      }
+    },
+    {
+      "id": "smart",
+      "title": {
+        "en": "Smart",
+        "nl": "Smart"
+      }
+    },
+    {
+      "id": "scheduled",
+      "title": {
+        "en": "Scheduled",
+        "nl": "Gepland"
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "charging_paused",
+  "title": {
+    "en": "Charging paused",
+    "nl": "Laden gepauzeerd"
+  },
+  "titleFormatted": {
+    "en": "Charging paused",
+    "nl": "Laden gepauzeerd"
+  },
+  "hint": {
+    "en": "Fires when the EV or EVSE pauses an active charging session (OCPP 2.0.1: richer pause reason detection).",
+    "nl": "Wordt geactiveerd wanneer de EV of EVSE een actieve laadsessie pauzeert (OCPP 2.0.1: rijkere pauzeredendetectie)."
+  },
+  "tokens": [
+    {
+      "name": "charger_name",
+      "type": "string",
+      "title": {
+        "en": "Charger name",
+        "nl": "Laadpuntnaam"
+      },
+      "example": {
+        "en": "Driveway Charger"
+      }
+    },
+    {
+      "name": "pause_reason",
+      "type": "string",
+      "title": {
+        "en": "Pause reason",
+        "nl": "Pauzeereden"
+      },
+      "example": {
+        "en": "EV requested"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}
