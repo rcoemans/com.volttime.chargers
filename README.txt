@@ -23,10 +23,36 @@ Supported devices:
 Setup:
 1. Install the app on your Homey
 2. Add a new device: Volt Time Chargers > Source 2S
-3. The pairing wizard asks for a Personal Access Token from your Volt Time Cloud account
+3. Obtain your Volt Time API token (see steps below)
 4. Select your charger from the discovered list
 5. The device will connect automatically and start reading data
 6. Connection settings can be changed later in device Settings
+
+How to obtain a Volt Time API Token:
+Step 1 — Log in to Volt Time
+- Open the Volt Time web portal: https://app.volttime.com
+- Log in with your Volt Time account
+
+Step 2 — Open your account settings
+- Click your profile icon in the top-right corner
+- Select Account Settings
+
+Step 3 — Create an API token
+- Navigate to the API Tokens section
+- Click Create Token
+- Give the token a name, for example: Homey Integration
+- Confirm the creation of the token
+
+Step 4 — Copy the token
+- Volt Time will show a long string, for example: vt_3f7a2b8e9c1d4e6f...
+- IMPORTANT: Copy this token immediately. It may only be shown once
+
+Step 5 — Enter the token in Homey
+- Open the Volt Time Chargers app settings in Homey
+- Paste the token into the API Token field
+- Save the settings
+
+The app will now connect to your Volt Time account and automatically discover your chargers.
 
 Known limitations:
 - Requires internet connection (Volt Time Cloud API)

@@ -1,4 +1,8 @@
 {
+  "1.0.1": {
+    "en": "Lowered minimum compatibility to support more Homey firmware versions and improve local installation compatibility.",
+    "nl": "Minimale compatibiliteit verlaagd om meer Homey-firmwareversies te ondersteunen en lokale installatiecompatibiliteit te verbeteren."
+  },
   "1.0.0": {
     "en": "Initial release: Volt Time Cloud API integration with charger monitoring, start/stop charging, current limit control, Homey Energy support, and 17 flow cards.",
     "nl": "Eerste release: Volt Time Cloud API-integratie met ladermonitoring, starten/stoppen van laden, stroomlimiet-regeling, Homey Energy-ondersteuning en 17 flow-kaarten."
