@@ -12,7 +12,7 @@ Functies:
 - Adaptieve polling: sneller tijdens laden, langzamer wanneer inactief
 - OCPP 1.6J en OCPP 2.0.1 protocolondersteuning (selecteerbaar in apparaatinstellingen)
 - OCPP 2.0.1 extra’s: ladertemperatuur, slimme laadprofielen, Plug & Charge (ISO 15118)
-- 10 basiscapabilities + 4 OCPP 2.0.1-capabilities (dynamisch toegevoegd/verwijderd)
+- 11 basiscapabilities (incl. ladergezondheid dashboard) + 4 OCPP 2.0.1-capabilities (dynamisch toegevoegd/verwijderd)
 - 11 flow-triggerkaarten: laden gestart/gestopt/gepauzeerd/hervat, status gewijzigd, vermogen gewijzigd, storing gedetecteerd/opgelost, voertuig verbonden/losgekoppeld, laadlimiet gewijzigd
 - 13 flow-conditiekaarten met inversie-ondersteuning (is/is niet)
 - 9 flow-actiekaarten: laden starten/stoppen/wisselen, stroomlimiet instellen/verhogen/verlagen, doelenergie instellen, laadprofiel instellen, verversen
@@ -64,8 +64,15 @@ Apparaatbediening:
 OCPP-protocolversie:
 - Standaard: OCPP 1.6J (gebruikt bij eerste installatie van het apparaat)
 - OCPP 2.0.1 kan worden geselecteerd in apparaatinstellingen voor extra mogelijkheden en flow-kaarten
-- OCPP 2.0.1-capabilities (temperatuur, laadprofiel, Plug & Charge, smart laden) worden automatisch toegevoegd/verwijderd bij wijziging van de instelling
+- OCPP 2.0.1-capabilities (temperatuur, laadprofiel, Plug & Charge, smart laden) worden automatisch aan het dashboard toegevoegd bij wijziging van de instelling
 - OCPP 2.0.1-only flow-kaarten tonen een foutmelding als het apparaat is ingesteld op OCPP 1.6J
+
+Dashboard-capabilities (altijd zichtbaar):
+- Laden (aan/uit), Vermogen (W), Stroom (A), Spanning (V), Totale energie (kWh), Sessie-energie (kWh)
+- Laadstatus, Connectorstatus, Storingsalarm, Laadstroomlimiet (schuif), Ladergezondheid
+
+Dashboard-capabilities (alleen OCPP 2.0.1, toegevoegd bij selectie):
+- Ladertemperatuur (°C), Laadprofielmodus, Plug & Charge, Smart laden actief
 
 Flow-kaarten - Voorwaarden:
 - Lader laadt/laadt niet

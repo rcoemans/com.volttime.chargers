@@ -12,7 +12,7 @@ Features:
 - Adaptive polling: faster during charging, slower when idle
 - OCPP 1.6J and OCPP 2.0.1 protocol support (selectable in device settings)
 - OCPP 2.0.1 extras: charger temperature, smart charging profiles, Plug & Charge (ISO 15118)
-- 10 base capabilities + 4 OCPP 2.0.1 capabilities (dynamically added/removed)
+- 11 base capabilities (incl. charger health dashboard) + 4 OCPP 2.0.1 capabilities (dynamically added/removed)
 - 11 flow trigger cards: charging started/stopped/paused/resumed, status changed, power changed, fault detected/cleared, vehicle connected/disconnected, charge limit changed
 - 13 flow condition cards with inversion support (is/is not)
 - 9 flow action cards: start/stop/toggle charging, set/increase/decrease current limit, set target energy, set charging profile, refresh
@@ -64,8 +64,15 @@ Device controls:
 OCPP protocol version:
 - Default: OCPP 1.6J (used during initial device installation)
 - OCPP 2.0.1 can be selected in device settings to unlock extra capabilities and flow cards
-- OCPP 2.0.1 capabilities (temperature, charging profile, Plug & Charge, smart charging) are automatically added/removed when you change the setting
+- OCPP 2.0.1 capabilities (temperature, charging profile, Plug & Charge, smart charging) are automatically added to the dashboard when you change the setting
 - OCPP 2.0.1-only flow cards will show an error if the device is set to OCPP 1.6J
+
+Device dashboard capabilities (always visible):
+- Charging (on/off), Power (W), Current (A), Voltage (V), Total energy (kWh), Session energy (kWh)
+- Charger status, Connector status, Fault alarm, Charging current limit (slider), Charger health
+
+Device dashboard capabilities (OCPP 2.0.1 only, added when selected):
+- Charger temperature (°C), Charging profile mode, Plug & Charge, Smart charging active
 
 Flow cards - Conditions:
 - Charger is/is not charging

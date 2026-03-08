@@ -39,6 +39,7 @@ export class ChargerBase extends Homey.Device {
     this.registerCapabilityListener('onoff', this.onCapabilityOnoff.bind(this));
     this.registerCapabilityListener('target_charging_current', this.onCapabilityTargetChargingCurrent.bind(this));
 
+    await this.ensureBaseCapabilities();
     await this.syncOcppCapabilities();
     this.startPolling();
 
@@ -61,8 +62,9 @@ export class ChargerBase extends Homey.Device {
     }
 
     if (event.changedKeys.includes('ocpp_version')) {
-      this.log(`OCPP version changed to ${event.newSettings.ocpp_version}`);
-      await this.syncOcppCapabilities();
+      const newVersion = event.newSettings.ocpp_version as string;
+      this.log(`OCPP version changed to ${newVersion}`);
+      await this.syncOcppCapabilities(newVersion);
       await this.refreshState();
     }
   }
@@ -175,6 +177,9 @@ export class ChargerBase extends Homey.Device {
     // Fault alarm
     const hasFault = chargerStatus === 'faulted';
     await this.safeSetCapabilityValue('alarm_fault', hasFault);
+
+    // Charger health (all OCPP versions — richer with 2.0.1 temperature)
+    await this.safeSetCapabilityValue('charger_health', this.isChargerHealthOk());
 
     // Target energy auto-stop
     if (this.targetEnergy > 0 && this.isCharging) {
@@ -510,8 +515,19 @@ export class ChargerBase extends Homey.Device {
     }
   }
 
-  private async syncOcppCapabilities(): Promise<void> {
-    const is201 = this.isOcpp201();
+  private async ensureBaseCapabilities(): Promise<void> {
+    const required = ['charger_health'];
+    for (const cap of required) {
+      if (!this.hasCapability(cap)) {
+        await this.addCapability(cap).catch((err) =>
+          this.error(`Failed to add base capability ${cap}:`, err));
+        this.log(`Added missing base capability: ${cap}`);
+      }
+    }
+  }
+
+  private async syncOcppCapabilities(versionOverride?: string): Promise<void> {
+    const is201 = versionOverride ? versionOverride === '2.0.1' : this.isOcpp201();
     for (const cap of OCPP_201_CAPABILITIES) {
       if (is201 && !this.hasCapability(cap)) {
         await this.addCapability(cap).catch((err) =>
@@ -521,7 +537,8 @@ export class ChargerBase extends Homey.Device {
           this.error(`Failed to remove capability ${cap}:`, err));
       }
     }
-    this.log(`OCPP ${this.getOcppVersion()} capabilities synced`);
+    const effectiveVersion = versionOverride || this.getOcppVersion();
+    this.log(`OCPP ${effectiveVersion} capabilities synced`);
   }
 
   compareValue(actual: number, operator: string, target: number): boolean {

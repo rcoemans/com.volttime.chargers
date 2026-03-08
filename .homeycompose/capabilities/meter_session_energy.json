@@ -12,5 +12,10 @@
     "en": "kWh",
     "nl": "kWh"
   },
-  "decimals": 2
+  "decimals": 2,
+  "insights": true,
+  "insightsTitle": {
+    "en": "Session energy",
+    "nl": "Sessie-energie"
+  }
 }

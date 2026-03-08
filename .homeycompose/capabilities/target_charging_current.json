@@ -14,5 +14,10 @@
   },
   "min": 6,
   "max": 32,
-  "step": 1
+  "step": 1,
+  "insights": true,
+  "insightsTitle": {
+    "en": "Charging current limit",
+    "nl": "Laadstroomlimiet"
+  }
 }

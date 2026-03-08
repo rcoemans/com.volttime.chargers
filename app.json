@@ -1392,7 +1392,8 @@
         "connector_status",
         "alarm_fault",
         "target_charging_current",
-        "meter_session_energy"
+        "meter_session_energy",
+        "charger_health"
       ],
       "capabilitiesOptions": {
         "onoff": {
@@ -1443,6 +1444,12 @@
           "title": {
             "en": "Session energy",
             "nl": "Sessie-energie"
+          }
+        },
+        "charger_health": {
+          "title": {
+            "en": "Charger health",
+            "nl": "Ladergezondheid"
           }
         }
       },
@@ -1627,6 +1634,27 @@
       "insightsTitleFalse": {
         "en": "Smart charging inactive",
         "nl": "Smart laden inactief"
+      }
+    },
+    "charger_health": {
+      "type": "boolean",
+      "title": {
+        "en": "Charger health",
+        "nl": "Ladergezondheid"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "uiQuickAction": false,
+      "icon": "/assets/icons/efficiency.svg",
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Charger healthy",
+        "nl": "Lader gezond"
+      },
+      "insightsTitleFalse": {
+        "en": "Charger unhealthy",
+        "nl": "Lader ongezond"
       }
     },
     "charger_status": {
@@ -1829,7 +1857,12 @@
         "en": "kWh",
         "nl": "kWh"
       },
-      "decimals": 2
+      "decimals": 2,
+      "insights": true,
+      "insightsTitle": {
+        "en": "Session energy",
+        "nl": "Sessie-energie"
+      }
     },
     "plug_and_charge": {
       "type": "boolean",
@@ -1868,7 +1901,12 @@
       },
       "min": 6,
       "max": 32,
-      "step": 1
+      "step": 1,
+      "insights": true,
+      "insightsTitle": {
+        "en": "Charging current limit",
+        "nl": "Laadstroomlimiet"
+      }
     }
   }
 }

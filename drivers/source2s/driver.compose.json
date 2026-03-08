@@ -14,7 +14,8 @@
     "connector_status",
     "alarm_fault",
     "target_charging_current",
-    "meter_session_energy"
+    "meter_session_energy",
+    "charger_health"
   ],
   "capabilitiesOptions": {
     "onoff": {
@@ -65,6 +66,12 @@
       "title": {
         "en": "Session energy",
         "nl": "Sessie-energie"
+      }
+    },
+    "charger_health": {
+      "title": {
+        "en": "Charger health",
+        "nl": "Ladergezondheid"
       }
     }
   },

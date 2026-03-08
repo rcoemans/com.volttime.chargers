@@ -1,0 +1,21 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Charger health",
+    "nl": "Ladergezondheid"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "uiQuickAction": false,
+  "icon": "/assets/icons/efficiency.svg",
+  "insights": true,
+  "insightsTitleTrue": {
+    "en": "Charger healthy",
+    "nl": "Lader gezond"
+  },
+  "insightsTitleFalse": {
+    "en": "Charger unhealthy",
+    "nl": "Lader ongezond"
+  }
+}
