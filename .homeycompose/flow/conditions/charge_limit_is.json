@@ -1,0 +1,47 @@
+{
+  "id": "charge_limit_is",
+  "title": {
+    "en": "Charge limit comparison",
+    "nl": "Laadlimiet vergelijking"
+  },
+  "titleFormatted": {
+    "en": "Charge limit !{{is|is not}} [[operator]] [[value]] A",
+    "nl": "Laadlimiet !{{is|is niet}} [[operator]] [[value]] A"
+  },
+  "hint": {
+    "en": "Checks if the configured charging current limit matches the condition.",
+    "nl": "Controleert of de ingestelde laadstroomlimiet voldoet aan de voorwaarde."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    },
+    {
+      "type": "dropdown",
+      "name": "operator",
+      "title": {
+        "en": "Operator",
+        "nl": "Operator"
+      },
+      "values": [
+        { "id": "lt", "label": { "en": "Less than", "nl": "Kleiner dan" } },
+        { "id": "lte", "label": { "en": "Less than or equal", "nl": "Kleiner dan of gelijk aan" } },
+        { "id": "gt", "label": { "en": "Greater than", "nl": "Groter dan" } },
+        { "id": "gte", "label": { "en": "Greater than or equal", "nl": "Groter dan of gelijk aan" } }
+      ]
+    },
+    {
+      "type": "number",
+      "name": "value",
+      "title": {
+        "en": "Value",
+        "nl": "Waarde"
+      },
+      "min": 6,
+      "max": 32,
+      "step": 1
+    }
+  ]
+}

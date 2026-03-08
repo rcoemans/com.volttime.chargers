@@ -1,0 +1,18 @@
+{
+  "id": "is_available",
+  "title": {
+    "en": "Charger !{{is|is not}} available",
+    "nl": "Lader !{{is|is niet}} beschikbaar"
+  },
+  "hint": {
+    "en": "Checks if the charger is idle and ready to start a charging session.",
+    "nl": "Controleert of de lader inactief is en klaar is om een laadsessie te starten."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

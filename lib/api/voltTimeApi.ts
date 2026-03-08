@@ -223,8 +223,10 @@ export class VoltTimeApi {
 
       const energySample = samples.find((s) => s.measurand === 'Energy.Active.Import.Register');
       if (energySample) {
-        const wh = parseFloat(energySample.value);
-        if (!isNaN(wh)) energyTotal = wh / 1000;
+        const raw = parseFloat(energySample.value);
+        if (!isNaN(raw)) {
+          energyTotal = (energySample.unit?.toLowerCase() === 'kwh') ? raw : raw / 1000;
+        }
       }
 
       const offeredSample = samples.find((s) => s.measurand === 'Current.Offered');
@@ -259,21 +261,9 @@ export class VoltTimeApi {
   }
 
   async setCurrentLimit(chargerUuid: string, connectorId: number = 1, current: number): Promise<void> {
-    await this.request('POST', `/api/v3/chargers/${chargerUuid}/actions/set-charging-profile`, {
+    await this.request('POST', `/api/v3/chargers/${chargerUuid}/actions/charge-limit`, {
       connector_id: connectorId,
-      charging_profile: {
-        charging_profile_id: 1,
-        stack_level: 0,
-        charging_profile_purpose: 'TxDefaultProfile',
-        charging_profile_kind: 'Recurring',
-        recurrency_kind: 'Daily',
-        charging_schedule: {
-          charging_rate_unit: 'A',
-          charging_schedule_period: [
-            { start_period: 0, limit: current, number_phases: 3 },
-          ],
-        },
-      },
+      limit: current,
     });
   }
 

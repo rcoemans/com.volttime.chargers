@@ -54,6 +54,18 @@
         "en": "Fault",
         "nl": "Storing"
       }
+    },
+    "target_charging_current": {
+      "title": {
+        "en": "Charging current limit",
+        "nl": "Laadstroomlimiet"
+      }
+    },
+    "meter_session_energy": {
+      "title": {
+        "en": "Session energy",
+        "nl": "Sessie-energie"
+      }
     }
   },
   "energy": {

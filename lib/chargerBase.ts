@@ -274,8 +274,22 @@ export class ChargerBase extends Homey.Device {
     await this.onCapabilityOnoff(false);
   }
 
+  async toggleChargingAction(): Promise<void> {
+    await this.onCapabilityOnoff(!this.isCharging);
+  }
+
   async setCurrentLimitAction(current: number): Promise<void> {
     await this.onCapabilityTargetChargingCurrent(current);
+  }
+
+  async increaseCurrentLimitAction(delta: number): Promise<void> {
+    const current = this.getCurrentLimit() || 6;
+    await this.onCapabilityTargetChargingCurrent(current + delta);
+  }
+
+  async decreaseCurrentLimitAction(delta: number): Promise<void> {
+    const current = this.getCurrentLimit() || 6;
+    await this.onCapabilityTargetChargingCurrent(current - delta);
   }
 
   async refreshNowAction(): Promise<void> {
@@ -289,6 +303,10 @@ export class ChargerBase extends Homey.Device {
   isVehicleConnected(): boolean {
     const status = this.getCapabilityValue('charger_status');
     return status !== 'available' && status !== 'unavailable' && status !== 'unknown';
+  }
+
+  isChargerAvailable(): boolean {
+    return this.getCapabilityValue('charger_status') === 'available';
   }
 
   hasFault(): boolean {

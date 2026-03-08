@@ -4,16 +4,16 @@ Functies:
 - Real-time laadgegevens: vermogen (W), stroom (A), spanning (V), energie (kWh)
 - Monitoring van laadstatus: beschikbaar, voorbereiden, laden, onderbroken, afronden, storing
 - Connector-/kabelstatus: verbonden, niet verbonden, vergrendeld, ontgrendeld
-- Start en stop laadsessies vanuit Homey
-- Dynamische laadstroomlimietregeling (6–32 A)
+- Aan/Uit-schakelaar: start of stopt een actieve laadsessie via Remote Start/Stop opdracht
+- Laadstroomlimietschuif (6-32 A): regelt de maximale laadsnelheid naar de lader
 - Sessie-energiemeting (kWh per sessie)
 - Totale geïmporteerde energie voor Homey Energy-integratie
 - Storingsdetectie en meldingen
 - Adaptieve polling: sneller tijdens laden, langzamer wanneer inactief
 - 10 apparaat-capabilities
 - 8 custom flow-triggerkaarten: laden gestart/gestopt, status gewijzigd, vermogen gewijzigd, storing gedetecteerd, voertuig verbonden/losgekoppeld, laadlimiet gewijzigd
-- 5 custom flow-conditiekaarten met inversie-ondersteuning (is/is niet): laadt, verbonden, heeft storing, status is, vermogen is (met operatorvergelijking)
-- 4 flow-actiekaarten: laden starten, laden stoppen, stroomlimiet instellen, ladergegevens verversen
+- 8 custom flow-conditiekaarten met inversie-ondersteuning (is/is niet): laadt, verbonden, heeft storing, is beschikbaar, status is, vermogen is, stroom is, laadlimiet is
+- 7 flow-actiekaarten: laden starten/stoppen/wisselen, stroomlimiet instellen/verhogen/verlagen, ladergegevens verversen
 - Volledig gelokaliseerd in Engels en Nederlands
 
 Ondersteunde apparaten:
@@ -54,6 +54,29 @@ De app gebruikt deze waarde als Bearer-token en ontdekt daarna automatisch uw la
 
 Korte UI-helptekst:
 Maak uw token aan in Plugchoice Web Portal -> klik linksonder op uw naam -> Account Settings -> API Tokens.
+
+Apparaatbediening:
+- Aan/Uit-knop ("Laden"): zet laden AAN om een Remote Start-opdracht naar de lader te sturen, of UIT om een Remote Stop-opdracht te sturen. Dit regelt de laadsessie, niet de hardware.
+- Laadstroomlimietschuif (6-32 A): stelt de maximale stroom in die de lader levert. Een lagere limiet vermindert laadsnelheid en vermogensonttrekking. Handig voor zonne-energie of netontlasting.
+
+Flow-kaarten - Voorwaarden:
+- Lader laadt/laadt niet
+- Voertuig is/is niet verbonden
+- Lader heeft/heeft geen storing
+- Lader is/is niet beschikbaar (inactief en gereed)
+- Laadstatus is/is niet [status]
+- Vermogen is/is niet [operator] [waarde] W
+- Laadstroom is/is niet [operator] [waarde] A
+- Laadlimiet is/is niet [operator] [waarde] A
+
+Flow-kaarten - Acties:
+- Laden starten
+- Laden stoppen
+- Laden aan/uit schakelen
+- Stroomlimiet instellen op [waarde] A
+- Stroomlimiet verhogen met [waarde] A
+- Stroomlimiet verlagen met [waarde] A
+- Ladergegevens nu verversen
 
 Bekende beperkingen:
 - Vereist internetverbinding (Volt Time Cloud API)

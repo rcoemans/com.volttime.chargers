@@ -4,16 +4,16 @@ Features:
 - Real-time charging data: power (W), current (A), voltage (V), energy (kWh)
 - Charger status monitoring: available, preparing, charging, suspended, finishing, faulted
 - Connector / cable status: connected, disconnected, locked, unlocked
-- Start and stop charging sessions from Homey
-- Dynamic charging current limit control (6–32 A)
+- On/Off toggle: starts or stops an active charging session via Remote Start/Stop command
+- Charging current limit slider (6-32 A): controls maximum charging speed sent to the charger
 - Session energy tracking (kWh per session)
 - Total imported energy for Homey Energy integration
 - Fault detection and alerting
 - Adaptive polling: faster during charging, slower when idle
 - 10 device capabilities
 - 8 custom flow trigger cards: charging started/stopped, status changed, power changed, fault detected, vehicle connected/disconnected, charge limit changed
-- 5 custom flow condition cards with inversion support (is/is not): is charging, is connected, has fault, status is, power is (with operator comparison)
-- 4 flow action cards: start charging, stop charging, set current limit, refresh charger data
+- 8 custom flow condition cards with inversion support (is/is not): is charging, is connected, has fault, is available, status is, power is, current is, charge limit is
+- 7 flow action cards: start, stop, toggle charging, set/increase/decrease current limit, refresh charger data
 - Fully localized in English and Dutch (Nederlands)
 
 Supported devices:
@@ -54,6 +54,29 @@ The app uses this value as a Bearer token and will now automatically discover yo
 
 Short UI help text:
 Create your token in Plugchoice Web Portal -> click your name bottom-left -> Account Settings -> API Tokens.
+
+Device controls:
+- On/Off button ("Charging"): turns charging ON to send a Remote Start command to the charger, or OFF to send a Remote Stop command. This controls the charging session, not the hardware power.
+- Charging current limit slider (6-32 A): sets the maximum current the charger delivers. Lowering the limit reduces speed and power draw. Useful for solar surplus charging or avoiding grid overload.
+
+Flow cards - Conditions:
+- Charger is/is not charging
+- Vehicle is/is not connected
+- Charger has/has no fault
+- Charger is/is not available (idle and ready)
+- Charger status is/is not [status]
+- Power is/is not [operator] [value] W
+- Charging current is/is not [operator] [value] A
+- Charge limit is/is not [operator] [value] A
+
+Flow cards - Actions:
+- Start charging
+- Stop charging
+- Toggle charging on/off
+- Set current limit to [value] A
+- Increase current limit by [value] A
+- Decrease current limit by [value] A
+- Refresh charger data now
 
 Known limitations:
 - Requires internet connection (Volt Time Cloud API)

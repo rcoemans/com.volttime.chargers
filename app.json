@@ -358,6 +358,147 @@
     ],
     "conditions": [
       {
+        "id": "charge_limit_is",
+        "title": {
+          "en": "Charge limit comparison",
+          "nl": "Laadlimiet vergelijking"
+        },
+        "titleFormatted": {
+          "en": "Charge limit !{{is|is not}} [[operator]] [[value]] A",
+          "nl": "Laadlimiet !{{is|is niet}} [[operator]] [[value]] A"
+        },
+        "hint": {
+          "en": "Checks if the configured charging current limit matches the condition.",
+          "nl": "Controleert of de ingestelde laadstroomlimiet voldoet aan de voorwaarde."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          },
+          {
+            "type": "dropdown",
+            "name": "operator",
+            "title": {
+              "en": "Operator",
+              "nl": "Operator"
+            },
+            "values": [
+              {
+                "id": "lt",
+                "label": {
+                  "en": "Less than",
+                  "nl": "Kleiner dan"
+                }
+              },
+              {
+                "id": "lte",
+                "label": {
+                  "en": "Less than or equal",
+                  "nl": "Kleiner dan of gelijk aan"
+                }
+              },
+              {
+                "id": "gt",
+                "label": {
+                  "en": "Greater than",
+                  "nl": "Groter dan"
+                }
+              },
+              {
+                "id": "gte",
+                "label": {
+                  "en": "Greater than or equal",
+                  "nl": "Groter dan of gelijk aan"
+                }
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "value",
+            "title": {
+              "en": "Value",
+              "nl": "Waarde"
+            },
+            "min": 6,
+            "max": 32,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "current_is",
+        "title": {
+          "en": "Current comparison",
+          "nl": "Stroom vergelijking"
+        },
+        "titleFormatted": {
+          "en": "Charging current !{{is|is not}} [[operator]] [[value]] A",
+          "nl": "Laadstroom !{{is|is niet}} [[operator]] [[value]] A"
+        },
+        "hint": {
+          "en": "Checks if the live charging current matches the condition.",
+          "nl": "Controleert of de actuele laadstroom voldoet aan de voorwaarde."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          },
+          {
+            "type": "dropdown",
+            "name": "operator",
+            "title": {
+              "en": "Operator",
+              "nl": "Operator"
+            },
+            "values": [
+              {
+                "id": "lt",
+                "label": {
+                  "en": "Less than",
+                  "nl": "Kleiner dan"
+                }
+              },
+              {
+                "id": "lte",
+                "label": {
+                  "en": "Less than or equal",
+                  "nl": "Kleiner dan of gelijk aan"
+                }
+              },
+              {
+                "id": "gt",
+                "label": {
+                  "en": "Greater than",
+                  "nl": "Groter dan"
+                }
+              },
+              {
+                "id": "gte",
+                "label": {
+                  "en": "Greater than or equal",
+                  "nl": "Groter dan of gelijk aan"
+                }
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "value",
+            "title": {
+              "en": "Value",
+              "nl": "Waarde"
+            },
+            "min": 0,
+            "step": 1
+          }
+        ]
+      },
+      {
         "id": "has_fault",
         "title": {
           "en": "Charger !{{has|has no}} fault",
@@ -366,6 +507,24 @@
         "hint": {
           "en": "Checks if the charger has an active fault.",
           "nl": "Controleert of de lader een actieve storing heeft."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "is_available",
+        "title": {
+          "en": "Charger !{{is|is not}} available",
+          "nl": "Lader !{{is|is niet}} beschikbaar"
+        },
+        "hint": {
+          "en": "Checks if the charger is idle and ready to start a charging session.",
+          "nl": "Controleert of de lader inactief is en klaar is om een laadsessie te starten."
         },
         "args": [
           {
@@ -579,6 +738,72 @@
     ],
     "actions": [
       {
+        "id": "decrease_current_limit",
+        "title": {
+          "en": "Decrease current limit",
+          "nl": "Laadlimiet verlagen"
+        },
+        "titleFormatted": {
+          "en": "Decrease current limit by [[value]] A",
+          "nl": "Laadlimiet verlagen met [[value]] A"
+        },
+        "hint": {
+          "en": "Decreases the charging current limit by the specified amount. Clamped to minimum 6 A.",
+          "nl": "Verlaagt de laadstroomlimiet met de opgegeven waarde. Minimaal 6 A."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          },
+          {
+            "type": "number",
+            "name": "value",
+            "title": {
+              "en": "Amount (A)",
+              "nl": "Hoeveelheid (A)"
+            },
+            "min": 1,
+            "max": 26,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "increase_current_limit",
+        "title": {
+          "en": "Increase current limit",
+          "nl": "Laadlimiet verhogen"
+        },
+        "titleFormatted": {
+          "en": "Increase current limit by [[value]] A",
+          "nl": "Laadlimiet verhogen met [[value]] A"
+        },
+        "hint": {
+          "en": "Increases the charging current limit by the specified amount. Clamped to maximum 32 A.",
+          "nl": "Verhoogt de laadstroomlimiet met de opgegeven waarde. Maximaal 32 A."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          },
+          {
+            "type": "number",
+            "name": "value",
+            "title": {
+              "en": "Amount (A)",
+              "nl": "Hoeveelheid (A)"
+            },
+            "min": 1,
+            "max": 26,
+            "step": 1
+          }
+        ]
+      },
+      {
         "id": "refresh_now",
         "title": {
           "en": "Refresh charger data",
@@ -676,6 +901,28 @@
             "filter": "driver_id=source2s"
           }
         ]
+      },
+      {
+        "id": "toggle_charging",
+        "title": {
+          "en": "Toggle charging",
+          "nl": "Laden aan/uit"
+        },
+        "titleFormatted": {
+          "en": "Toggle charging on/off",
+          "nl": "Laden aan/uit schakelen"
+        },
+        "hint": {
+          "en": "Starts charging if stopped, stops charging if active.",
+          "nl": "Start het laden als het gestopt is, stopt als het actief is."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
       }
     ]
   },
@@ -735,6 +982,18 @@
           "title": {
             "en": "Fault",
             "nl": "Storing"
+          }
+        },
+        "target_charging_current": {
+          "title": {
+            "en": "Charging current limit",
+            "nl": "Laadstroomlimiet"
+          }
+        },
+        "meter_session_energy": {
+          "title": {
+            "en": "Session energy",
+            "nl": "Sessie-energie"
           }
         }
       },

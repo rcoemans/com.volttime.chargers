@@ -42,6 +42,21 @@ module.exports = class VoltTimeChargersApp extends Homey.App {
         return args.device.compareValue(args.device.getCurrentPower(), args.operator, args.value);
       });
 
+    this.homey.flow.getConditionCard('is_available')
+      .registerRunListener(async (args: { device: ChargerBase }) => {
+        return args.device.isChargerAvailable();
+      });
+
+    this.homey.flow.getConditionCard('current_is')
+      .registerRunListener(async (args: { device: ChargerBase; operator: string; value: number }) => {
+        return args.device.compareValue(args.device.getCapabilityValue('measure_current') || 0, args.operator, args.value);
+      });
+
+    this.homey.flow.getConditionCard('charge_limit_is')
+      .registerRunListener(async (args: { device: ChargerBase; operator: string; value: number }) => {
+        return args.device.compareValue(args.device.getCurrentLimit(), args.operator, args.value);
+      });
+
     // ── Action cards ──
 
     this.homey.flow.getActionCard('start_charging')
@@ -54,9 +69,24 @@ module.exports = class VoltTimeChargersApp extends Homey.App {
         await args.device.stopChargingAction();
       });
 
+    this.homey.flow.getActionCard('toggle_charging')
+      .registerRunListener(async (args: { device: ChargerBase }) => {
+        await args.device.toggleChargingAction();
+      });
+
     this.homey.flow.getActionCard('set_current_limit')
       .registerRunListener(async (args: { device: ChargerBase; current: number }) => {
         await args.device.setCurrentLimitAction(args.current);
+      });
+
+    this.homey.flow.getActionCard('increase_current_limit')
+      .registerRunListener(async (args: { device: ChargerBase; value: number }) => {
+        await args.device.increaseCurrentLimitAction(args.value);
+      });
+
+    this.homey.flow.getActionCard('decrease_current_limit')
+      .registerRunListener(async (args: { device: ChargerBase; value: number }) => {
+        await args.device.decreaseCurrentLimitAction(args.value);
       });
 
     this.homey.flow.getActionCard('refresh_now')

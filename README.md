@@ -87,13 +87,31 @@ The app uses this value as a Bearer token and will automatically discover your c
 **Short UI help text:**
 Create your token in Plugchoice Web Portal -> click your name bottom-left -> Account Settings -> API Tokens.
 
-## Device Variables
+## Device Controls & Variables
 
-All capabilities exposed by the charger device, with their variable name (as used in flows/tags) and data type.
+### On/Off button — Start / Stop Charging
+
+The **Charging** toggle button in the device view starts or stops an active charging session:
+
+- **ON** — sends a Remote Start Transaction command to the charger via the Volt Time Cloud API. The charger will begin a charging session on the configured connector.
+- **OFF** — sends a Remote Stop Transaction command. The charger will end the current charging session.
+
+> This button controls the active charging state. It does **not** control power to the charger hardware itself.
+
+### Charging Current Limit slider
+
+The **Charging current limit** slider (6–32 A) sets the maximum charging current the charger is allowed to deliver:
+
+- Drag the slider to a value between **6 A** (minimum safe EVSE current) and **32 A** (maximum).
+- The value is sent immediately to the charger via the Volt Time Cloud API.
+- Lowering the limit reduces charging speed and power draw — useful for solar surplus charging or avoiding grid overload.
+- Raising the limit allows faster charging up to the hardware maximum.
+
+### All device capabilities
 
 | Variable                   | Type    | Description                          | Indicator |
 |----------------------------|---------|--------------------------------------|:---------:|
-| `onoff`                    | boolean | Charging active (on/off)             | ✓         |
+| `onoff`                    | boolean | Charging active — start/stop session | ✓         |
 | `measure_power`            | number  | Live charging power (W)              | ✓         |
 | `meter_power`              | number  | Total imported energy (kWh)          |           |
 | `measure_current`          | number  | Live charging current (A)            | ✓         |
@@ -101,7 +119,7 @@ All capabilities exposed by the charger device, with their variable name (as use
 | `charger_status`           | enum    | Charger status                       |           |
 | `connector_status`         | enum    | Connector / cable status             |           |
 | `alarm_fault`              | boolean | Charger fault active                 | ✓         |
-| `target_charging_current`  | number  | Charging current limit (A)           |           |
+| `target_charging_current`  | number  | Charging current limit (A) — slider  |           |
 | `meter_session_energy`     | number  | Current session energy (kWh)         |           |
 
 ## Charger Status Values
@@ -135,22 +153,28 @@ All capabilities exposed by the charger device, with their variable name (as use
 
 ### Conditions (AND…)
 
-| Condition                                    | Description                                              |
-|----------------------------------------------|----------------------------------------------------------|
-| Charger is / is not charging                 | Checks if the charger is currently charging              |
-| Vehicle is / is not connected                | Checks if a vehicle is connected                         |
-| Charger has / has no fault                   | Checks if the charger has an active fault                |
-| Charger status is / is not [status]          | Checks if the status matches a selected value            |
-| Power is / is not [operator] [value] W       | Checks if the power matches the condition                |
+| Condition                                         | Description                                                      |
+|---------------------------------------------------|------------------------------------------------------------------|
+| Charger is / is not charging                      | Checks if the charger is currently charging                      |
+| Vehicle is / is not connected                     | Checks if a vehicle is connected                                 |
+| Charger has / has no fault                        | Checks if the charger has an active fault                        |
+| Charger is / is not available                     | Checks if the charger is idle and ready for a new session        |
+| Charger status is / is not [status]               | Checks if the status matches a selected value                    |
+| Power is / is not [operator] [value] W            | Checks if the charging power matches the condition               |
+| Charging current is / is not [operator] [value] A | Checks if the live charging current matches the condition        |
+| Charge limit is / is not [operator] [value] A     | Checks if the configured current limit matches the condition     |
 
 ### Actions (THEN…)
 
-| Action                              | Description                                              |
-|-------------------------------------|----------------------------------------------------------|
-| Start charging                      | Starts a charging session                                |
-| Stop charging                       | Stops the current charging session                       |
-| Set current limit to [value] A      | Sets the charging current limit (6–32 A)                 |
-| Refresh charger data now            | Immediately refreshes all charger data from the API      |
+| Action                                  | Description                                                        |
+|-----------------------------------------|--------------------------------------------------------------------|
+| Start charging                          | Starts a charging session on the charger                           |
+| Stop charging                           | Stops the current charging session                                 |
+| Toggle charging on/off                  | Starts if stopped, stops if active                                 |
+| Set current limit to [value] A          | Sets the charging current limit (6–32 A)                           |
+| Increase current limit by [value] A     | Increases the current limit by the given amount (max 32 A)         |
+| Decrease current limit by [value] A     | Decreases the current limit by the given amount (min 6 A)          |
+| Refresh charger data now                | Immediately refreshes all charger data from the API                |
 
 ### Flow Card Variables (Tokens)
 
@@ -198,13 +222,20 @@ The device is marked as a cumulative energy device for accurate Energy dashboard
 
 ### Solar surplus charging
 
-- **WHEN** Solar export > 1500 W **AND** Vehicle is connected → **THEN** Start charging
-- **WHEN** Solar export < 500 W → **THEN** Stop charging
+- **WHEN** Solar export > 1500 W **AND** Vehicle is connected **AND** Charger is available → **THEN** Start charging
+- **WHEN** Solar export < 500 W **AND** Charger is charging → **THEN** Stop charging
+- **WHEN** Power has changed **AND** Charging current is not greater than 32 A → **THEN** Increase current limit by 1 A
 
 ### Dynamic current control
 
 - **WHEN** Electricity price is low → **THEN** Set current limit to 32 A
-- **WHEN** Electricity price is high → **THEN** Set current limit to 6 A
+- **WHEN** Electricity price is high **AND** Charger is charging → **THEN** Decrease current limit by 4 A
+- **WHEN** Electricity price is very high → **THEN** Stop charging
+
+### Charge limit automation
+
+- **WHEN** Charge limit has changed **AND** Charge limit is less than 8 A → **THEN** Send notification: "Charge limit reduced to {{new_limit}} A"
+- **WHEN** Current has changed **AND** Charging current is greater than 28 A → **THEN** Send notification: "High current charging active"
 
 ## Architecture
 

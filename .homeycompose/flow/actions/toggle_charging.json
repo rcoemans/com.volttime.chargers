@@ -1,0 +1,22 @@
+{
+  "id": "toggle_charging",
+  "title": {
+    "en": "Toggle charging",
+    "nl": "Laden aan/uit"
+  },
+  "titleFormatted": {
+    "en": "Toggle charging on/off",
+    "nl": "Laden aan/uit schakelen"
+  },
+  "hint": {
+    "en": "Starts charging if stopped, stops charging if active.",
+    "nl": "Start het laden als het gestopt is, stopt als het actief is."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

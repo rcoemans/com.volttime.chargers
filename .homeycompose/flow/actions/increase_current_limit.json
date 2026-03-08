@@ -1,0 +1,33 @@
+{
+  "id": "increase_current_limit",
+  "title": {
+    "en": "Increase current limit",
+    "nl": "Laadlimiet verhogen"
+  },
+  "titleFormatted": {
+    "en": "Increase current limit by [[value]] A",
+    "nl": "Laadlimiet verhogen met [[value]] A"
+  },
+  "hint": {
+    "en": "Increases the charging current limit by the specified amount. Clamped to maximum 32 A.",
+    "nl": "Verhoogt de laadstroomlimiet met de opgegeven waarde. Maximaal 32 A."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    },
+    {
+      "type": "number",
+      "name": "value",
+      "title": {
+        "en": "Amount (A)",
+        "nl": "Hoeveelheid (A)"
+      },
+      "min": 1,
+      "max": 26,
+      "step": 1
+    }
+  ]
+}

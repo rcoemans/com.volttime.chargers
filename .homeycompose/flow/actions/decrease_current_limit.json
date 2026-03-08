@@ -1,0 +1,33 @@
+{
+  "id": "decrease_current_limit",
+  "title": {
+    "en": "Decrease current limit",
+    "nl": "Laadlimiet verlagen"
+  },
+  "titleFormatted": {
+    "en": "Decrease current limit by [[value]] A",
+    "nl": "Laadlimiet verlagen met [[value]] A"
+  },
+  "hint": {
+    "en": "Decreases the charging current limit by the specified amount. Clamped to minimum 6 A.",
+    "nl": "Verlaagt de laadstroomlimiet met de opgegeven waarde. Minimaal 6 A."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    },
+    {
+      "type": "number",
+      "name": "value",
+      "title": {
+        "en": "Amount (A)",
+        "nl": "Hoeveelheid (A)"
+      },
+      "min": 1,
+      "max": 26,
+      "step": 1
+    }
+  ]
+}
