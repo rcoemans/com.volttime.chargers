@@ -1,26 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Station body -->
-  <rect x="28" y="10" width="36" height="68" rx="7" fill="#3a9d8f"/>
+  <!-- Station body outline -->
+  <rect x="28" y="10" width="36" height="68" rx="7" fill="none" stroke="#000" stroke-width="3"/>
   <!-- Front panel / display -->
-  <rect x="34" y="16" width="24" height="22" rx="4" fill="#d0f1ea"/>
+  <rect x="34" y="16" width="24" height="22" rx="3" fill="none" stroke="#000" stroke-width="2"/>
   <!-- Lightning bolt on display -->
-  <polygon points="50,18 44,28 49,28 43,38 51,27 46,27" fill="#3a9d8f"/>
+  <polygon points="50,18.5 44,28 49,28 43,37.5 51,27 46,27" fill="#000"/>
   <!-- Charging port housing -->
-  <rect x="36" y="46" width="20" height="14" rx="3" fill="#2a8070"/>
+  <rect x="37" y="46" width="18" height="13" rx="3" fill="none" stroke="#000" stroke-width="2"/>
   <!-- Two pin holes in port -->
-  <rect x="39" y="49" width="5" height="7" rx="1.5" fill="#d0f1ea"/>
-  <rect x="48" y="49" width="5" height="7" rx="1.5" fill="#d0f1ea"/>
-  <!-- Status LED strip -->
-  <rect x="34" y="65" width="24" height="5" rx="2.5" fill="#2a8070"/>
-  <rect x="36" y="66" width="6" height="3" rx="1.5" fill="#7ecdb8"/>
-  <rect x="44" y="66" width="6" height="3" rx="1.5" fill="#7ecdb8"/>
-  <rect x="52" y="66" width="4" height="3" rx="1.5" fill="#2a8070"/>
+  <rect x="40" y="49" width="4" height="6" rx="1.5" fill="#000"/>
+  <rect x="48" y="49" width="4" height="6" rx="1.5" fill="#000"/>
   <!-- Base -->
-  <rect x="20" y="78" width="52" height="8" rx="5" fill="#2a8070"/>
+  <rect x="20" y="78" width="52" height="7" rx="4" fill="none" stroke="#000" stroke-width="2.5"/>
   <!-- Charging cable -->
-  <path d="M64 52 Q78 52 78 64" stroke="#2a8070" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-  <!-- Cable plug connector -->
-  <rect x="74" y="63" width="8" height="12" rx="2" fill="#1e6b5e"/>
-  <rect x="76" y="66" width="2" height="4" rx="1" fill="#3a9d8f"/>
-  <rect x="80" y="66" width="2" height="4" rx="1" fill="#3a9d8f"/>
+  <path d="M64 52 Q79 52 79 66" stroke="#000" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Cable plug body -->
+  <rect x="75" y="65" width="8" height="11" rx="2" fill="none" stroke="#000" stroke-width="2"/>
+  <!-- Plug pins -->
+  <rect x="77" y="68" width="1.5" height="4" rx="0.75" fill="#000"/>
+  <rect x="80.5" y="68" width="1.5" height="4" rx="0.75" fill="#000"/>
 </svg>

@@ -6,7 +6,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      padding: 24px 20px;
+      padding: 24px 20px 20px;
       color: #1a1a1a;
       background: #fff;
     }
@@ -56,43 +56,67 @@
       border-radius: 6px;
       border: 1px solid #f5c6c6;
     }
+    .btn-connect {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: #3a9d8f;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-connect:hover { background: #2a8070; }
+    .btn-connect:disabled { background: #9dcdc8; cursor: not-allowed; }
   </style>
 </head>
 <body>
-  <h2 id="label-title">Connect to Plugchoice</h2>
-  <p class="subtitle" id="label-subtitle">Enter your Personal Access Token to discover your chargers.</p>
+  <h2>Connect to Plugchoice</h2>
+  <p class="subtitle">Enter your Personal Access Token to discover your chargers.</p>
 
-  <label for="token" id="label-token">Personal Access Token</label>
-  <input type="password" id="token" autocomplete="off" spellcheck="false" />
-  <p class="hint" id="label-hint">
-    Get your token at app.plugchoice.com → click your name bottom-left → Account Settings → API Tokens
+  <label for="token">Personal Access Token</label>
+  <input type="password" id="token" autocomplete="off" spellcheck="false"
+         placeholder="Paste your token here" />
+  <p class="hint">
+    Get your token at app.plugchoice.com &rarr; click your name bottom-left &rarr; Account Settings &rarr; API Tokens
   </p>
   <p class="error" id="error-msg"></p>
 
+  <button class="btn-connect" id="btn-connect" onclick="connect()">Connect</button>
+
   <script>
     function onShowView() {
-      Homey.setTitle('');
       document.getElementById('token').focus();
     }
 
-    async function onNextView() {
+    async function connect() {
       var token = document.getElementById('token').value.trim();
       var errorEl = document.getElementById('error-msg');
+      var btn = document.getElementById('btn-connect');
+
       errorEl.style.display = 'none';
 
       if (!token) {
-        errorEl.textContent = Homey.__('pair.errors.enter_token') || 'Please enter a Personal Access Token.';
+        errorEl.textContent = 'Please enter a Personal Access Token.';
         errorEl.style.display = 'block';
-        throw new Error('No token entered');
+        return;
       }
 
+      btn.disabled = true;
+      btn.textContent = 'Connecting\u2026';
+
       try {
-        var result = await Homey.emit('login', { username: token, password: '' });
-        if (!result) throw new Error(Homey.__('pair.errors.invalid_token') || 'Invalid or expired token.');
+        await Homey.emit('login', { username: token, password: '' });
+        Homey.nextView();
       } catch (err) {
-        errorEl.textContent = err.message || Homey.__('pair.errors.invalid_token');
+        errorEl.textContent = err.message || 'Invalid or expired token. Please try again.';
         errorEl.style.display = 'block';
-        throw err;
+        btn.disabled = false;
+        btn.textContent = 'Connect';
       }
     }
   </script>
