@@ -1,0 +1,35 @@
+{
+  "id": "fault_detected",
+  "title": {
+    "en": "Fault detected",
+    "nl": "Storing gedetecteerd"
+  },
+  "titleFormatted": {
+    "en": "Fault detected",
+    "nl": "Storing gedetecteerd"
+  },
+  "hint": {
+    "en": "Fires when the charger reports a fault.",
+    "nl": "Wordt geactiveerd wanneer de lader een storing meldt."
+  },
+  "tokens": [
+    {
+      "name": "fault_text",
+      "type": "string",
+      "title": {
+        "en": "Fault description",
+        "nl": "Storingsbeschrijving"
+      },
+      "example": {
+        "en": "Ground fault"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

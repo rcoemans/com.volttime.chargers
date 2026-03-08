@@ -1,0 +1,22 @@
+{
+  "id": "stop_charging",
+  "title": {
+    "en": "Stop charging",
+    "nl": "Stop laden"
+  },
+  "titleFormatted": {
+    "en": "Stop charging",
+    "nl": "Stop laden"
+  },
+  "hint": {
+    "en": "Stops the current charging session on the charger.",
+    "nl": "Stopt de huidige laadsessie op de lader."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+Control and monitor Volt Time EV chargers using Volt Time Cloud or OCPP.
+
+Features:
+- Real-time charging data: power (W), current (A), voltage (V), energy (kWh)
+- Charger status monitoring: available, preparing, charging, suspended, finishing, faulted
+- Connector / cable status: connected, disconnected, locked, unlocked
+- Start and stop charging sessions from Homey
+- Dynamic charging current limit control (6–32 A)
+- Session energy tracking (kWh per session)
+- Total imported energy for Homey Energy integration
+- Fault detection and alerting
+- Adaptive polling: faster during charging, slower when idle
+- 10 device capabilities
+- 8 custom flow trigger cards: charging started/stopped, status changed, power changed, fault detected, vehicle connected/disconnected, charge limit changed
+- 5 custom flow condition cards with inversion support (is/is not): is charging, is connected, has fault, status is, power is (with operator comparison)
+- 4 flow action cards: start charging, stop charging, set current limit, refresh charger data
+- Fully localized in English and Dutch (Nederlands)
+
+Supported devices:
+- ALP Volt Time Source 2S (FP-CH-SRC2S-BCB) via Volt Time Cloud API
+- Future Volt Time charger models (architecture ready)
+
+Setup:
+1. Install the app on your Homey
+2. Add a new device: Volt Time Chargers > Source 2S
+3. The pairing wizard asks for a Personal Access Token from your Volt Time Cloud account
+4. Select your charger from the discovered list
+5. The device will connect automatically and start reading data
+6. Connection settings can be changed later in device Settings
+
+Known limitations:
+- Requires internet connection (Volt Time Cloud API)
+- OAuth sign-in planned for a future release
+- OCPP local communication planned for a future release
+- After app updates adding new capabilities, you may need to remove and re-add the device

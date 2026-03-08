@@ -1,0 +1,18 @@
+{
+  "id": "is_charging",
+  "title": {
+    "en": "Charger !{{is|is not}} charging",
+    "nl": "Lader !{{is|is niet}} aan het laden"
+  },
+  "hint": {
+    "en": "Checks if the charger is currently charging.",
+    "nl": "Controleert of de lader momenteel aan het laden is."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "refresh_now",
+  "title": {
+    "en": "Refresh charger data",
+    "nl": "Ververs ladergegevens"
+  },
+  "titleFormatted": {
+    "en": "Refresh charger data now",
+    "nl": "Ververs ladergegevens nu"
+  },
+  "hint": {
+    "en": "Immediately refreshes all charger data from the API.",
+    "nl": "Vernieuwt onmiddellijk alle ladergegevens vanuit de API."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

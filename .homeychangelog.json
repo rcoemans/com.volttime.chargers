@@ -1,0 +1,6 @@
+{
+  "1.0.0": {
+    "en": "Initial release: Volt Time Cloud API integration with charger monitoring, start/stop charging, current limit control, Homey Energy support, and 17 flow cards.",
+    "nl": "Eerste release: Volt Time Cloud API-integratie met ladermonitoring, starten/stoppen van laden, stroomlimiet-regeling, Homey Energy-ondersteuning en 17 flow-kaarten."
+  }
+}

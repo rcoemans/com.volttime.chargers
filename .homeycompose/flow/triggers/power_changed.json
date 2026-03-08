@@ -1,0 +1,46 @@
+{
+  "id": "power_changed",
+  "title": {
+    "en": "Power has changed",
+    "nl": "Vermogen is gewijzigd"
+  },
+  "titleFormatted": {
+    "en": "Power has changed",
+    "nl": "Vermogen is gewijzigd"
+  },
+  "hint": {
+    "en": "Fires when the charging power changes significantly.",
+    "nl": "Wordt geactiveerd wanneer het laadvermogen significant wijzigt."
+  },
+  "tokens": [
+    {
+      "name": "power",
+      "type": "number",
+      "title": {
+        "en": "Power (W)",
+        "nl": "Vermogen (W)"
+      },
+      "example": {
+        "en": "7400"
+      }
+    },
+    {
+      "name": "previous_power",
+      "type": "number",
+      "title": {
+        "en": "Previous power (W)",
+        "nl": "Vorig vermogen (W)"
+      },
+      "example": {
+        "en": "3700"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

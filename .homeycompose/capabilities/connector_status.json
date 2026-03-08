@@ -1,0 +1,48 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Connector status",
+    "nl": "Connectorstatus"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/power.svg",
+  "values": [
+    {
+      "id": "disconnected",
+      "title": {
+        "en": "Disconnected",
+        "nl": "Niet verbonden"
+      }
+    },
+    {
+      "id": "connected",
+      "title": {
+        "en": "Connected",
+        "nl": "Verbonden"
+      }
+    },
+    {
+      "id": "locked",
+      "title": {
+        "en": "Locked",
+        "nl": "Vergrendeld"
+      }
+    },
+    {
+      "id": "unlocked",
+      "title": {
+        "en": "Unlocked",
+        "nl": "Ontgrendeld"
+      }
+    },
+    {
+      "id": "unknown",
+      "title": {
+        "en": "Unknown",
+        "nl": "Onbekend"
+      }
+    }
+  ]
+}

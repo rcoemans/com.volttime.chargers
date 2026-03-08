@@ -1,0 +1,18 @@
+{
+  "id": "is_connected",
+  "title": {
+    "en": "Vehicle !{{is|is not}} connected",
+    "nl": "Voertuig !{{is|is niet}} verbonden"
+  },
+  "hint": {
+    "en": "Checks if a vehicle is connected to the charger.",
+    "nl": "Controleert of een voertuig verbonden is met de lader."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

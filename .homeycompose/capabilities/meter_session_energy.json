@@ -1,0 +1,16 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Session energy",
+    "nl": "Sessie-energie"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/efficiency.svg",
+  "units": {
+    "en": "kWh",
+    "nl": "kWh"
+  },
+  "decimals": 2
+}

@@ -1,0 +1,31 @@
+{
+  "id": "com.volttime.chargers",
+  "version": "1.0.0",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Volt Time Chargers",
+    "nl": "Volt Time Laders"
+  },
+  "description": {
+    "en": "Control and monitor Volt Time EV chargers using Volt Time Cloud or OCPP.",
+    "nl": "Bedien en monitor Volt Time EV-laders met Volt Time Cloud of OCPP."
+  },
+  "brandColor": "#3a9d8f",
+  "category": [
+    "energy"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Robert Coemans",
+    "email": "r.coemans@hotmail.com"
+  }
+}

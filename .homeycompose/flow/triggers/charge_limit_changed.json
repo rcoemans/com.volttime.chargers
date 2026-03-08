@@ -1,0 +1,46 @@
+{
+  "id": "charge_limit_changed",
+  "title": {
+    "en": "Charge limit has changed",
+    "nl": "Laadlimiet is gewijzigd"
+  },
+  "titleFormatted": {
+    "en": "Charge limit has changed",
+    "nl": "Laadlimiet is gewijzigd"
+  },
+  "hint": {
+    "en": "Fires when the charging current limit changes.",
+    "nl": "Wordt geactiveerd wanneer de laadstroomlimiet wijzigt."
+  },
+  "tokens": [
+    {
+      "name": "new_limit",
+      "type": "number",
+      "title": {
+        "en": "New limit (A)",
+        "nl": "Nieuwe limiet (A)"
+      },
+      "example": {
+        "en": "16"
+      }
+    },
+    {
+      "name": "previous_limit",
+      "type": "number",
+      "title": {
+        "en": "Previous limit (A)",
+        "nl": "Vorige limiet (A)"
+      },
+      "example": {
+        "en": "32"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

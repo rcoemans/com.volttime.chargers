@@ -1,0 +1,33 @@
+{
+  "pair": {
+    "welcome": {
+      "title": "Volt Time Lader",
+      "subtitle": "Verbind uw Volt Time EV lader met Homey.",
+      "body": "U heeft een Personal Access Token nodig van uw Volt Time Cloud account. Maak er een aan op developer.volttime.com en plak deze in de volgende stap."
+    },
+    "token": {
+      "title": "Personal Access Token",
+      "body": "Maak een Personal Access Token aan in Volt Time Cloud en plak deze hieronder. De app gebruikt deze om de laadstatus te lezen en laadopdrachten te sturen."
+    },
+    "errors": {
+      "enter_token": "Voer een Personal Access Token in.",
+      "invalid_token": "Ongeldige of verlopen token. Controleer uw Personal Access Token en probeer het opnieuw.",
+      "no_chargers": "Geen laders gevonden op uw Volt Time account.",
+      "could_not_retrieve": "Kon laders niet ophalen uit Volt Time Cloud.",
+      "network_error": "Kan Volt Time Cloud niet bereiken. Controleer uw internetverbinding.",
+      "rate_limited": "Te veel verzoeken. Wacht even en probeer het opnieuw."
+    }
+  },
+  "settings": {
+    "token": "Personal Access Token",
+    "connector_id": "Connector ID",
+    "poll_interval_idle": "Polling-interval bij inactiviteit (seconden)",
+    "poll_interval_charging": "Polling-interval bij laden (seconden)"
+  },
+  "capability": {
+    "charger_status": "Laadstatus",
+    "connector_status": "Connectorstatus",
+    "target_charging_current": "Laadstroomlimiet",
+    "meter_session_energy": "Sessie-energie"
+  }
+}

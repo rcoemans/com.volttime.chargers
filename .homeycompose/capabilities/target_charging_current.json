@@ -1,0 +1,18 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Charging current limit",
+    "nl": "Laadstroomlimiet"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "slider",
+  "icon": "/assets/icons/performance.svg",
+  "units": {
+    "en": "A",
+    "nl": "A"
+  },
+  "min": 6,
+  "max": 32,
+  "step": 1
+}

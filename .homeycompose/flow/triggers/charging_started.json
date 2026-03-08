@@ -1,0 +1,35 @@
+{
+  "id": "charging_started",
+  "title": {
+    "en": "Charging started",
+    "nl": "Laden gestart"
+  },
+  "titleFormatted": {
+    "en": "Charging started",
+    "nl": "Laden gestart"
+  },
+  "hint": {
+    "en": "Fires when the charger starts a charging session.",
+    "nl": "Wordt geactiveerd wanneer de lader een laadsessie start."
+  },
+  "tokens": [
+    {
+      "name": "charger_name",
+      "type": "string",
+      "title": {
+        "en": "Charger name",
+        "nl": "Laadpuntnaam"
+      },
+      "example": {
+        "en": "Driveway Charger"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Charger status",
+    "nl": "Laadstatus"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/on-off-button.svg",
+  "values": [
+    {
+      "id": "available",
+      "title": {
+        "en": "Available",
+        "nl": "Beschikbaar"
+      }
+    },
+    {
+      "id": "preparing",
+      "title": {
+        "en": "Preparing",
+        "nl": "Voorbereiden"
+      }
+    },
+    {
+      "id": "charging",
+      "title": {
+        "en": "Charging",
+        "nl": "Laden"
+      }
+    },
+    {
+      "id": "suspended_ev",
+      "title": {
+        "en": "Suspended (EV)",
+        "nl": "Onderbroken (EV)"
+      }
+    },
+    {
+      "id": "suspended_evse",
+      "title": {
+        "en": "Suspended (EVSE)",
+        "nl": "Onderbroken (EVSE)"
+      }
+    },
+    {
+      "id": "finishing",
+      "title": {
+        "en": "Finishing",
+        "nl": "Afronden"
+      }
+    },
+    {
+      "id": "reserved",
+      "title": {
+        "en": "Reserved",
+        "nl": "Gereserveerd"
+      }
+    },
+    {
+      "id": "unavailable",
+      "title": {
+        "en": "Unavailable",
+        "nl": "Niet beschikbaar"
+      }
+    },
+    {
+      "id": "faulted",
+      "title": {
+        "en": "Faulted",
+        "nl": "Storing"
+      }
+    },
+    {
+      "id": "unknown",
+      "title": {
+        "en": "Unknown",
+        "nl": "Onbekend"
+      }
+    }
+  ]
+}

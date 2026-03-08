@@ -1,0 +1,70 @@
+'use strict';
+
+import Homey from 'homey';
+import { ChargerBase } from './lib/chargerBase';
+
+module.exports = class VoltTimeChargersApp extends Homey.App {
+
+  /**
+   * onInit is called when the app is initialized.
+   */
+  async onInit() {
+    this.log('Volt Time Chargers app has been initialized');
+
+    this.registerFlowCards();
+  }
+
+  private registerFlowCards(): void {
+    // ── Condition cards ──
+
+    this.homey.flow.getConditionCard('is_charging')
+      .registerRunListener(async (args: { device: ChargerBase }) => {
+        return args.device.isDeviceCharging();
+      });
+
+    this.homey.flow.getConditionCard('is_connected')
+      .registerRunListener(async (args: { device: ChargerBase }) => {
+        return args.device.isVehicleConnected();
+      });
+
+    this.homey.flow.getConditionCard('has_fault')
+      .registerRunListener(async (args: { device: ChargerBase }) => {
+        return args.device.hasFault();
+      });
+
+    this.homey.flow.getConditionCard('status_is')
+      .registerRunListener(async (args: { device: ChargerBase; status: string }) => {
+        return args.device.getChargerStatus() === args.status;
+      });
+
+    this.homey.flow.getConditionCard('power_is')
+      .registerRunListener(async (args: { device: ChargerBase; operator: string; value: number }) => {
+        return args.device.compareValue(args.device.getCurrentPower(), args.operator, args.value);
+      });
+
+    // ── Action cards ──
+
+    this.homey.flow.getActionCard('start_charging')
+      .registerRunListener(async (args: { device: ChargerBase }) => {
+        await args.device.startChargingAction();
+      });
+
+    this.homey.flow.getActionCard('stop_charging')
+      .registerRunListener(async (args: { device: ChargerBase }) => {
+        await args.device.stopChargingAction();
+      });
+
+    this.homey.flow.getActionCard('set_current_limit')
+      .registerRunListener(async (args: { device: ChargerBase; current: number }) => {
+        await args.device.setCurrentLimitAction(args.current);
+      });
+
+    this.homey.flow.getActionCard('refresh_now')
+      .registerRunListener(async (args: { device: ChargerBase }) => {
+        await args.device.refreshNowAction();
+      });
+
+    this.log('Flow cards registered');
+  }
+
+};

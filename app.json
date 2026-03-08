@@ -1,0 +1,1064 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.volttime.chargers",
+  "version": "1.0.0",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Volt Time Chargers",
+    "nl": "Volt Time Laders"
+  },
+  "description": {
+    "en": "Control and monitor Volt Time EV chargers using Volt Time Cloud or OCPP.",
+    "nl": "Bedien en monitor Volt Time EV-laders met Volt Time Cloud of OCPP."
+  },
+  "brandColor": "#3a9d8f",
+  "category": [
+    "energy"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Robert Coemans",
+    "email": "r.coemans@hotmail.com"
+  },
+  "flow": {
+    "triggers": [
+      {
+        "id": "charge_limit_changed",
+        "title": {
+          "en": "Charge limit has changed",
+          "nl": "Laadlimiet is gewijzigd"
+        },
+        "titleFormatted": {
+          "en": "Charge limit has changed",
+          "nl": "Laadlimiet is gewijzigd"
+        },
+        "hint": {
+          "en": "Fires when the charging current limit changes.",
+          "nl": "Wordt geactiveerd wanneer de laadstroomlimiet wijzigt."
+        },
+        "tokens": [
+          {
+            "name": "new_limit",
+            "type": "number",
+            "title": {
+              "en": "New limit (A)",
+              "nl": "Nieuwe limiet (A)"
+            },
+            "example": {
+              "en": "16"
+            }
+          },
+          {
+            "name": "previous_limit",
+            "type": "number",
+            "title": {
+              "en": "Previous limit (A)",
+              "nl": "Vorige limiet (A)"
+            },
+            "example": {
+              "en": "32"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "charger_connected",
+        "title": {
+          "en": "Vehicle connected",
+          "nl": "Voertuig verbonden"
+        },
+        "titleFormatted": {
+          "en": "Vehicle connected",
+          "nl": "Voertuig verbonden"
+        },
+        "hint": {
+          "en": "Fires when a vehicle is connected to the charger.",
+          "nl": "Wordt geactiveerd wanneer een voertuig wordt verbonden met de lader."
+        },
+        "tokens": [
+          {
+            "name": "charger_name",
+            "type": "string",
+            "title": {
+              "en": "Charger name",
+              "nl": "Laadpuntnaam"
+            },
+            "example": {
+              "en": "Driveway Charger"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "charger_disconnected",
+        "title": {
+          "en": "Vehicle disconnected",
+          "nl": "Voertuig losgekoppeld"
+        },
+        "titleFormatted": {
+          "en": "Vehicle disconnected",
+          "nl": "Voertuig losgekoppeld"
+        },
+        "hint": {
+          "en": "Fires when a vehicle is disconnected from the charger.",
+          "nl": "Wordt geactiveerd wanneer een voertuig wordt losgekoppeld van de lader."
+        },
+        "tokens": [
+          {
+            "name": "charger_name",
+            "type": "string",
+            "title": {
+              "en": "Charger name",
+              "nl": "Laadpuntnaam"
+            },
+            "example": {
+              "en": "Driveway Charger"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "charger_status_changed",
+        "title": {
+          "en": "Charger status changed",
+          "nl": "Laadstatus gewijzigd"
+        },
+        "titleFormatted": {
+          "en": "Charger status changed",
+          "nl": "Laadstatus gewijzigd"
+        },
+        "hint": {
+          "en": "Fires when the charger status changes.",
+          "nl": "Wordt geactiveerd wanneer de laadstatus wijzigt."
+        },
+        "tokens": [
+          {
+            "name": "old_status",
+            "type": "string",
+            "title": {
+              "en": "Previous status",
+              "nl": "Vorige status"
+            },
+            "example": {
+              "en": "available"
+            }
+          },
+          {
+            "name": "new_status",
+            "type": "string",
+            "title": {
+              "en": "New status",
+              "nl": "Nieuwe status"
+            },
+            "example": {
+              "en": "charging"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "charging_started",
+        "title": {
+          "en": "Charging started",
+          "nl": "Laden gestart"
+        },
+        "titleFormatted": {
+          "en": "Charging started",
+          "nl": "Laden gestart"
+        },
+        "hint": {
+          "en": "Fires when the charger starts a charging session.",
+          "nl": "Wordt geactiveerd wanneer de lader een laadsessie start."
+        },
+        "tokens": [
+          {
+            "name": "charger_name",
+            "type": "string",
+            "title": {
+              "en": "Charger name",
+              "nl": "Laadpuntnaam"
+            },
+            "example": {
+              "en": "Driveway Charger"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "charging_stopped",
+        "title": {
+          "en": "Charging stopped",
+          "nl": "Laden gestopt"
+        },
+        "titleFormatted": {
+          "en": "Charging stopped",
+          "nl": "Laden gestopt"
+        },
+        "hint": {
+          "en": "Fires when the charger stops a charging session.",
+          "nl": "Wordt geactiveerd wanneer de lader een laadsessie stopt."
+        },
+        "tokens": [
+          {
+            "name": "charger_name",
+            "type": "string",
+            "title": {
+              "en": "Charger name",
+              "nl": "Laadpuntnaam"
+            },
+            "example": {
+              "en": "Driveway Charger"
+            }
+          },
+          {
+            "name": "session_energy",
+            "type": "number",
+            "title": {
+              "en": "Session energy (kWh)",
+              "nl": "Sessie-energie (kWh)"
+            },
+            "example": {
+              "en": "12.5"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "fault_detected",
+        "title": {
+          "en": "Fault detected",
+          "nl": "Storing gedetecteerd"
+        },
+        "titleFormatted": {
+          "en": "Fault detected",
+          "nl": "Storing gedetecteerd"
+        },
+        "hint": {
+          "en": "Fires when the charger reports a fault.",
+          "nl": "Wordt geactiveerd wanneer de lader een storing meldt."
+        },
+        "tokens": [
+          {
+            "name": "fault_text",
+            "type": "string",
+            "title": {
+              "en": "Fault description",
+              "nl": "Storingsbeschrijving"
+            },
+            "example": {
+              "en": "Ground fault"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "power_changed",
+        "title": {
+          "en": "Power has changed",
+          "nl": "Vermogen is gewijzigd"
+        },
+        "titleFormatted": {
+          "en": "Power has changed",
+          "nl": "Vermogen is gewijzigd"
+        },
+        "hint": {
+          "en": "Fires when the charging power changes significantly.",
+          "nl": "Wordt geactiveerd wanneer het laadvermogen significant wijzigt."
+        },
+        "tokens": [
+          {
+            "name": "power",
+            "type": "number",
+            "title": {
+              "en": "Power (W)",
+              "nl": "Vermogen (W)"
+            },
+            "example": {
+              "en": "7400"
+            }
+          },
+          {
+            "name": "previous_power",
+            "type": "number",
+            "title": {
+              "en": "Previous power (W)",
+              "nl": "Vorig vermogen (W)"
+            },
+            "example": {
+              "en": "3700"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "has_fault",
+        "title": {
+          "en": "Charger !{{has|has no}} fault",
+          "nl": "Lader !{{heeft|heeft geen}} storing"
+        },
+        "hint": {
+          "en": "Checks if the charger has an active fault.",
+          "nl": "Controleert of de lader een actieve storing heeft."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "is_charging",
+        "title": {
+          "en": "Charger !{{is|is not}} charging",
+          "nl": "Lader !{{is|is niet}} aan het laden"
+        },
+        "hint": {
+          "en": "Checks if the charger is currently charging.",
+          "nl": "Controleert of de lader momenteel aan het laden is."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "is_connected",
+        "title": {
+          "en": "Vehicle !{{is|is not}} connected",
+          "nl": "Voertuig !{{is|is niet}} verbonden"
+        },
+        "hint": {
+          "en": "Checks if a vehicle is connected to the charger.",
+          "nl": "Controleert of een voertuig verbonden is met de lader."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "power_is",
+        "title": {
+          "en": "Power comparison",
+          "nl": "Vermogen vergelijking"
+        },
+        "titleFormatted": {
+          "en": "Power !{{is|is not}} [[operator]] [[value]] W",
+          "nl": "Vermogen !{{is|is niet}} [[operator]] [[value]] W"
+        },
+        "hint": {
+          "en": "Checks if the current charging power matches the condition.",
+          "nl": "Controleert of het huidige laadvermogen voldoet aan de voorwaarde."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          },
+          {
+            "type": "dropdown",
+            "name": "operator",
+            "title": {
+              "en": "Operator",
+              "nl": "Operator"
+            },
+            "values": [
+              {
+                "id": "lt",
+                "label": {
+                  "en": "Less than",
+                  "nl": "Kleiner dan"
+                }
+              },
+              {
+                "id": "lte",
+                "label": {
+                  "en": "Less than or equal",
+                  "nl": "Kleiner dan of gelijk aan"
+                }
+              },
+              {
+                "id": "gt",
+                "label": {
+                  "en": "Greater than",
+                  "nl": "Groter dan"
+                }
+              },
+              {
+                "id": "gte",
+                "label": {
+                  "en": "Greater than or equal",
+                  "nl": "Groter dan of gelijk aan"
+                }
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "value",
+            "title": {
+              "en": "Value",
+              "nl": "Waarde"
+            },
+            "min": 0,
+            "step": 100
+          }
+        ]
+      },
+      {
+        "id": "status_is",
+        "title": {
+          "en": "Charger status comparison",
+          "nl": "Laadstatus vergelijking"
+        },
+        "titleFormatted": {
+          "en": "Charger status !{{is|is not}} [[status]]",
+          "nl": "Laadstatus !{{is|is niet}} [[status]]"
+        },
+        "hint": {
+          "en": "Checks if the charger status matches the selected value.",
+          "nl": "Controleert of de laadstatus overeenkomt met de geselecteerde waarde."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          },
+          {
+            "type": "dropdown",
+            "name": "status",
+            "title": {
+              "en": "Status",
+              "nl": "Status"
+            },
+            "values": [
+              {
+                "id": "available",
+                "label": {
+                  "en": "Available",
+                  "nl": "Beschikbaar"
+                }
+              },
+              {
+                "id": "preparing",
+                "label": {
+                  "en": "Preparing",
+                  "nl": "Voorbereiden"
+                }
+              },
+              {
+                "id": "charging",
+                "label": {
+                  "en": "Charging",
+                  "nl": "Laden"
+                }
+              },
+              {
+                "id": "suspended_ev",
+                "label": {
+                  "en": "Suspended (EV)",
+                  "nl": "Onderbroken (EV)"
+                }
+              },
+              {
+                "id": "suspended_evse",
+                "label": {
+                  "en": "Suspended (EVSE)",
+                  "nl": "Onderbroken (EVSE)"
+                }
+              },
+              {
+                "id": "finishing",
+                "label": {
+                  "en": "Finishing",
+                  "nl": "Afronden"
+                }
+              },
+              {
+                "id": "reserved",
+                "label": {
+                  "en": "Reserved",
+                  "nl": "Gereserveerd"
+                }
+              },
+              {
+                "id": "unavailable",
+                "label": {
+                  "en": "Unavailable",
+                  "nl": "Niet beschikbaar"
+                }
+              },
+              {
+                "id": "faulted",
+                "label": {
+                  "en": "Faulted",
+                  "nl": "Storing"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "refresh_now",
+        "title": {
+          "en": "Refresh charger data",
+          "nl": "Ververs ladergegevens"
+        },
+        "titleFormatted": {
+          "en": "Refresh charger data now",
+          "nl": "Ververs ladergegevens nu"
+        },
+        "hint": {
+          "en": "Immediately refreshes all charger data from the API.",
+          "nl": "Vernieuwt onmiddellijk alle ladergegevens vanuit de API."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "set_current_limit",
+        "title": {
+          "en": "Set current limit",
+          "nl": "Stel stroomlimiet in"
+        },
+        "titleFormatted": {
+          "en": "Set current limit to [[current]] A",
+          "nl": "Stel stroomlimiet in op [[current]] A"
+        },
+        "hint": {
+          "en": "Sets the charging current limit in amperes.",
+          "nl": "Stelt de laadstroomlimiet in ampère in."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          },
+          {
+            "type": "number",
+            "name": "current",
+            "title": {
+              "en": "Current (A)",
+              "nl": "Stroom (A)"
+            },
+            "min": 6,
+            "max": 32,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "start_charging",
+        "title": {
+          "en": "Start charging",
+          "nl": "Start laden"
+        },
+        "titleFormatted": {
+          "en": "Start charging",
+          "nl": "Start laden"
+        },
+        "hint": {
+          "en": "Starts a charging session on the charger.",
+          "nl": "Start een laadsessie op de lader."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      },
+      {
+        "id": "stop_charging",
+        "title": {
+          "en": "Stop charging",
+          "nl": "Stop laden"
+        },
+        "titleFormatted": {
+          "en": "Stop charging",
+          "nl": "Stop laden"
+        },
+        "hint": {
+          "en": "Stops the current charging session on the charger.",
+          "nl": "Stopt de huidige laadsessie op de lader."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=source2s"
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "Source 2S",
+        "nl": "Source 2S"
+      },
+      "class": "other",
+      "capabilities": [
+        "onoff",
+        "measure_power",
+        "meter_power",
+        "measure_current",
+        "measure_voltage",
+        "charger_status",
+        "connector_status",
+        "alarm_fault",
+        "target_charging_current",
+        "meter_session_energy"
+      ],
+      "capabilitiesOptions": {
+        "onoff": {
+          "title": {
+            "en": "Charging",
+            "nl": "Laden"
+          },
+          "greyout": false
+        },
+        "measure_power": {
+          "title": {
+            "en": "Power",
+            "nl": "Vermogen"
+          },
+          "approximated": true
+        },
+        "meter_power": {
+          "title": {
+            "en": "Total energy",
+            "nl": "Totale energie"
+          }
+        },
+        "measure_current": {
+          "title": {
+            "en": "Current",
+            "nl": "Stroom"
+          }
+        },
+        "measure_voltage": {
+          "title": {
+            "en": "Voltage",
+            "nl": "Spanning"
+          }
+        },
+        "alarm_fault": {
+          "title": {
+            "en": "Fault",
+            "nl": "Storing"
+          }
+        }
+      },
+      "energy": {
+        "cumulativeImportedCapability": "meter_power"
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "images": {
+        "small": "/drivers/source2s/assets/images/small.png",
+        "large": "/drivers/source2s/assets/images/large.png",
+        "xlarge": "/drivers/source2s/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "title": {
+              "en": "Connect to Volt Time Cloud",
+              "nl": "Verbind met Volt Time Cloud"
+            },
+            "logo": "../assets/icon.svg",
+            "usernameLabel": {
+              "en": "Personal Access Token",
+              "nl": "Personal Access Token"
+            },
+            "usernamePlaceholder": {
+              "en": "Paste your token here",
+              "nl": "Plak hier uw token"
+            },
+            "passwordLabel": {
+              "en": " ",
+              "nl": " "
+            },
+            "passwordPlaceholder": {
+              "en": " ",
+              "nl": " "
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Connection",
+            "nl": "Verbinding"
+          },
+          "children": [
+            {
+              "id": "token",
+              "type": "password",
+              "label": {
+                "en": "Personal Access Token",
+                "nl": "Personal Access Token"
+              },
+              "hint": {
+                "en": "Your Volt Time Cloud personal access token.",
+                "nl": "Uw Volt Time Cloud personal access token."
+              },
+              "value": ""
+            },
+            {
+              "id": "connector_id",
+              "type": "number",
+              "label": {
+                "en": "Connector ID",
+                "nl": "Connector ID"
+              },
+              "hint": {
+                "en": "The connector number to use (default: 1).",
+                "nl": "Het connectornummer dat moet worden gebruikt (standaard: 1)."
+              },
+              "value": 1,
+              "min": 1,
+              "max": 4
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Polling",
+            "nl": "Polling"
+          },
+          "children": [
+            {
+              "id": "poll_interval_idle",
+              "type": "number",
+              "label": {
+                "en": "Polling interval when idle (seconds)",
+                "nl": "Polling-interval bij inactiviteit (seconden)"
+              },
+              "hint": {
+                "en": "How often to poll the charger when idle.",
+                "nl": "Hoe vaak de lader wordt gepolld bij inactiviteit."
+              },
+              "value": 60,
+              "min": 10,
+              "max": 300
+            },
+            {
+              "id": "poll_interval_charging",
+              "type": "number",
+              "label": {
+                "en": "Polling interval when charging (seconds)",
+                "nl": "Polling-interval bij laden (seconden)"
+              },
+              "hint": {
+                "en": "How often to poll the charger when charging.",
+                "nl": "Hoe vaak de lader wordt gepolld bij laden."
+              },
+              "value": 10,
+              "min": 5,
+              "max": 60
+            }
+          ]
+        }
+      ],
+      "id": "source2s"
+    }
+  ],
+  "capabilities": {
+    "alarm_fault": {
+      "type": "boolean",
+      "title": {
+        "en": "Fault",
+        "nl": "Storing"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "uiQuickAction": false,
+      "icon": "/assets/icons/alarm.svg",
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Fault active",
+        "nl": "Storing actief"
+      },
+      "insightsTitleFalse": {
+        "en": "No fault",
+        "nl": "Geen storing"
+      }
+    },
+    "charger_status": {
+      "type": "enum",
+      "title": {
+        "en": "Charger status",
+        "nl": "Laadstatus"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/on-off-button.svg",
+      "values": [
+        {
+          "id": "available",
+          "title": {
+            "en": "Available",
+            "nl": "Beschikbaar"
+          }
+        },
+        {
+          "id": "preparing",
+          "title": {
+            "en": "Preparing",
+            "nl": "Voorbereiden"
+          }
+        },
+        {
+          "id": "charging",
+          "title": {
+            "en": "Charging",
+            "nl": "Laden"
+          }
+        },
+        {
+          "id": "suspended_ev",
+          "title": {
+            "en": "Suspended (EV)",
+            "nl": "Onderbroken (EV)"
+          }
+        },
+        {
+          "id": "suspended_evse",
+          "title": {
+            "en": "Suspended (EVSE)",
+            "nl": "Onderbroken (EVSE)"
+          }
+        },
+        {
+          "id": "finishing",
+          "title": {
+            "en": "Finishing",
+            "nl": "Afronden"
+          }
+        },
+        {
+          "id": "reserved",
+          "title": {
+            "en": "Reserved",
+            "nl": "Gereserveerd"
+          }
+        },
+        {
+          "id": "unavailable",
+          "title": {
+            "en": "Unavailable",
+            "nl": "Niet beschikbaar"
+          }
+        },
+        {
+          "id": "faulted",
+          "title": {
+            "en": "Faulted",
+            "nl": "Storing"
+          }
+        },
+        {
+          "id": "unknown",
+          "title": {
+            "en": "Unknown",
+            "nl": "Onbekend"
+          }
+        }
+      ]
+    },
+    "connector_status": {
+      "type": "enum",
+      "title": {
+        "en": "Connector status",
+        "nl": "Connectorstatus"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/power.svg",
+      "values": [
+        {
+          "id": "disconnected",
+          "title": {
+            "en": "Disconnected",
+            "nl": "Niet verbonden"
+          }
+        },
+        {
+          "id": "connected",
+          "title": {
+            "en": "Connected",
+            "nl": "Verbonden"
+          }
+        },
+        {
+          "id": "locked",
+          "title": {
+            "en": "Locked",
+            "nl": "Vergrendeld"
+          }
+        },
+        {
+          "id": "unlocked",
+          "title": {
+            "en": "Unlocked",
+            "nl": "Ontgrendeld"
+          }
+        },
+        {
+          "id": "unknown",
+          "title": {
+            "en": "Unknown",
+            "nl": "Onbekend"
+          }
+        }
+      ]
+    },
+    "meter_session_energy": {
+      "type": "number",
+      "title": {
+        "en": "Session energy",
+        "nl": "Sessie-energie"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/efficiency.svg",
+      "units": {
+        "en": "kWh",
+        "nl": "kWh"
+      },
+      "decimals": 2
+    },
+    "target_charging_current": {
+      "type": "number",
+      "title": {
+        "en": "Charging current limit",
+        "nl": "Laadstroomlimiet"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "slider",
+      "icon": "/assets/icons/performance.svg",
+      "units": {
+        "en": "A",
+        "nl": "A"
+      },
+      "min": 6,
+      "max": 32,
+      "step": 1
+    }
+  }
+}

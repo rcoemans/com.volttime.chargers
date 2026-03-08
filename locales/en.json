@@ -1,0 +1,33 @@
+{
+  "pair": {
+    "welcome": {
+      "title": "Volt Time Charger",
+      "subtitle": "Connect your Volt Time EV charger to Homey.",
+      "body": "You will need a Personal Access Token from your Volt Time Cloud account. Create one at developer.volttime.com and paste it in the next step."
+    },
+    "token": {
+      "title": "Personal Access Token",
+      "body": "Create a Personal Access Token in Volt Time Cloud and paste it below. The app will use it to read charger status and send charge control commands."
+    },
+    "errors": {
+      "enter_token": "Please enter a Personal Access Token.",
+      "invalid_token": "Invalid or expired token. Please verify your Personal Access Token and try again.",
+      "no_chargers": "No chargers found on your Volt Time account.",
+      "could_not_retrieve": "Could not retrieve chargers from Volt Time Cloud.",
+      "network_error": "Could not reach Volt Time Cloud. Please check your internet connection.",
+      "rate_limited": "Too many requests. Please wait a moment and try again."
+    }
+  },
+  "settings": {
+    "token": "Personal Access Token",
+    "connector_id": "Connector ID",
+    "poll_interval_idle": "Polling interval when idle (seconds)",
+    "poll_interval_charging": "Polling interval when charging (seconds)"
+  },
+  "capability": {
+    "charger_status": "Charger status",
+    "connector_status": "Connector status",
+    "target_charging_current": "Charging current limit",
+    "meter_session_energy": "Session energy"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "charger_disconnected",
+  "title": {
+    "en": "Vehicle disconnected",
+    "nl": "Voertuig losgekoppeld"
+  },
+  "titleFormatted": {
+    "en": "Vehicle disconnected",
+    "nl": "Voertuig losgekoppeld"
+  },
+  "hint": {
+    "en": "Fires when a vehicle is disconnected from the charger.",
+    "nl": "Wordt geactiveerd wanneer een voertuig wordt losgekoppeld van de lader."
+  },
+  "tokens": [
+    {
+      "name": "charger_name",
+      "type": "string",
+      "title": {
+        "en": "Charger name",
+        "nl": "Laadpuntnaam"
+      },
+      "example": {
+        "en": "Driveway Charger"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

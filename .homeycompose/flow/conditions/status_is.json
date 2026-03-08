@@ -1,0 +1,41 @@
+{
+  "id": "status_is",
+  "title": {
+    "en": "Charger status comparison",
+    "nl": "Laadstatus vergelijking"
+  },
+  "titleFormatted": {
+    "en": "Charger status !{{is|is not}} [[status]]",
+    "nl": "Laadstatus !{{is|is niet}} [[status]]"
+  },
+  "hint": {
+    "en": "Checks if the charger status matches the selected value.",
+    "nl": "Controleert of de laadstatus overeenkomt met de geselecteerde waarde."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    },
+    {
+      "type": "dropdown",
+      "name": "status",
+      "title": {
+        "en": "Status",
+        "nl": "Status"
+      },
+      "values": [
+        { "id": "available", "label": { "en": "Available", "nl": "Beschikbaar" } },
+        { "id": "preparing", "label": { "en": "Preparing", "nl": "Voorbereiden" } },
+        { "id": "charging", "label": { "en": "Charging", "nl": "Laden" } },
+        { "id": "suspended_ev", "label": { "en": "Suspended (EV)", "nl": "Onderbroken (EV)" } },
+        { "id": "suspended_evse", "label": { "en": "Suspended (EVSE)", "nl": "Onderbroken (EVSE)" } },
+        { "id": "finishing", "label": { "en": "Finishing", "nl": "Afronden" } },
+        { "id": "reserved", "label": { "en": "Reserved", "nl": "Gereserveerd" } },
+        { "id": "unavailable", "label": { "en": "Unavailable", "nl": "Niet beschikbaar" } },
+        { "id": "faulted", "label": { "en": "Faulted", "nl": "Storing" } }
+      ]
+    }
+  ]
+}

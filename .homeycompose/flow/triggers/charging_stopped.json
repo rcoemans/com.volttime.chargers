@@ -1,0 +1,46 @@
+{
+  "id": "charging_stopped",
+  "title": {
+    "en": "Charging stopped",
+    "nl": "Laden gestopt"
+  },
+  "titleFormatted": {
+    "en": "Charging stopped",
+    "nl": "Laden gestopt"
+  },
+  "hint": {
+    "en": "Fires when the charger stops a charging session.",
+    "nl": "Wordt geactiveerd wanneer de lader een laadsessie stopt."
+  },
+  "tokens": [
+    {
+      "name": "charger_name",
+      "type": "string",
+      "title": {
+        "en": "Charger name",
+        "nl": "Laadpuntnaam"
+      },
+      "example": {
+        "en": "Driveway Charger"
+      }
+    },
+    {
+      "name": "session_energy",
+      "type": "number",
+      "title": {
+        "en": "Session energy (kWh)",
+        "nl": "Sessie-energie (kWh)"
+      },
+      "example": {
+        "en": "12.5"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

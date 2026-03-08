@@ -1,0 +1,18 @@
+{
+  "id": "has_fault",
+  "title": {
+    "en": "Charger !{{has|has no}} fault",
+    "nl": "Lader !{{heeft|heeft geen}} storing"
+  },
+  "hint": {
+    "en": "Checks if the charger has an active fault.",
+    "nl": "Controleert of de lader een actieve storing heeft."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

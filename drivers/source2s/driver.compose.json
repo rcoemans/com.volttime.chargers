@@ -1,0 +1,191 @@
+{
+  "name": {
+    "en": "Source 2S",
+    "nl": "Source 2S"
+  },
+  "class": "other",
+  "capabilities": [
+    "onoff",
+    "measure_power",
+    "meter_power",
+    "measure_current",
+    "measure_voltage",
+    "charger_status",
+    "connector_status",
+    "alarm_fault",
+    "target_charging_current",
+    "meter_session_energy"
+  ],
+  "capabilitiesOptions": {
+    "onoff": {
+      "title": {
+        "en": "Charging",
+        "nl": "Laden"
+      },
+      "greyout": false
+    },
+    "measure_power": {
+      "title": {
+        "en": "Power",
+        "nl": "Vermogen"
+      },
+      "approximated": true
+    },
+    "meter_power": {
+      "title": {
+        "en": "Total energy",
+        "nl": "Totale energie"
+      }
+    },
+    "measure_current": {
+      "title": {
+        "en": "Current",
+        "nl": "Stroom"
+      }
+    },
+    "measure_voltage": {
+      "title": {
+        "en": "Voltage",
+        "nl": "Spanning"
+      }
+    },
+    "alarm_fault": {
+      "title": {
+        "en": "Fault",
+        "nl": "Storing"
+      }
+    }
+  },
+  "energy": {
+    "cumulativeImportedCapability": "meter_power"
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "cloud"
+  ],
+  "images": {
+    "small": "{{driverAssetsPath}}/images/small.png",
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "xlarge": "{{driverAssetsPath}}/images/xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "options": {
+        "title": {
+          "en": "Connect to Volt Time Cloud",
+          "nl": "Verbind met Volt Time Cloud"
+        },
+        "logo": "../assets/icon.svg",
+        "usernameLabel": {
+          "en": "Personal Access Token",
+          "nl": "Personal Access Token"
+        },
+        "usernamePlaceholder": {
+          "en": "Paste your token here",
+          "nl": "Plak hier uw token"
+        },
+        "passwordLabel": {
+          "en": " ",
+          "nl": " "
+        },
+        "passwordPlaceholder": {
+          "en": " ",
+          "nl": " "
+        }
+      }
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Connection",
+        "nl": "Verbinding"
+      },
+      "children": [
+        {
+          "id": "token",
+          "type": "password",
+          "label": {
+            "en": "Personal Access Token",
+            "nl": "Personal Access Token"
+          },
+          "hint": {
+            "en": "Your Volt Time Cloud personal access token.",
+            "nl": "Uw Volt Time Cloud personal access token."
+          },
+          "value": ""
+        },
+        {
+          "id": "connector_id",
+          "type": "number",
+          "label": {
+            "en": "Connector ID",
+            "nl": "Connector ID"
+          },
+          "hint": {
+            "en": "The connector number to use (default: 1).",
+            "nl": "Het connectornummer dat moet worden gebruikt (standaard: 1)."
+          },
+          "value": 1,
+          "min": 1,
+          "max": 4
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "label": {
+        "en": "Polling",
+        "nl": "Polling"
+      },
+      "children": [
+        {
+          "id": "poll_interval_idle",
+          "type": "number",
+          "label": {
+            "en": "Polling interval when idle (seconds)",
+            "nl": "Polling-interval bij inactiviteit (seconden)"
+          },
+          "hint": {
+            "en": "How often to poll the charger when idle.",
+            "nl": "Hoe vaak de lader wordt gepolld bij inactiviteit."
+          },
+          "value": 60,
+          "min": 10,
+          "max": 300
+        },
+        {
+          "id": "poll_interval_charging",
+          "type": "number",
+          "label": {
+            "en": "Polling interval when charging (seconds)",
+            "nl": "Polling-interval bij laden (seconden)"
+          },
+          "hint": {
+            "en": "How often to poll the charger when charging.",
+            "nl": "Hoe vaak de lader wordt gepolld bij laden."
+          },
+          "value": 10,
+          "min": 5,
+          "max": 60
+        }
+      ]
+    }
+  ]
+}

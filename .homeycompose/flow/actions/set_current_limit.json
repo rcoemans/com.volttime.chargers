@@ -1,0 +1,33 @@
+{
+  "id": "set_current_limit",
+  "title": {
+    "en": "Set current limit",
+    "nl": "Stel stroomlimiet in"
+  },
+  "titleFormatted": {
+    "en": "Set current limit to [[current]] A",
+    "nl": "Stel stroomlimiet in op [[current]] A"
+  },
+  "hint": {
+    "en": "Sets the charging current limit in amperes.",
+    "nl": "Stelt de laadstroomlimiet in ampère in."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    },
+    {
+      "type": "number",
+      "name": "current",
+      "title": {
+        "en": "Current (A)",
+        "nl": "Stroom (A)"
+      },
+      "min": 6,
+      "max": 32,
+      "step": 1
+    }
+  ]
+}

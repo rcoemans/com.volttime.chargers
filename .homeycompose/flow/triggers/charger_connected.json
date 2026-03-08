@@ -1,0 +1,35 @@
+{
+  "id": "charger_connected",
+  "title": {
+    "en": "Vehicle connected",
+    "nl": "Voertuig verbonden"
+  },
+  "titleFormatted": {
+    "en": "Vehicle connected",
+    "nl": "Voertuig verbonden"
+  },
+  "hint": {
+    "en": "Fires when a vehicle is connected to the charger.",
+    "nl": "Wordt geactiveerd wanneer een voertuig wordt verbonden met de lader."
+  },
+  "tokens": [
+    {
+      "name": "charger_name",
+      "type": "string",
+      "title": {
+        "en": "Charger name",
+        "nl": "Laadpuntnaam"
+      },
+      "example": {
+        "en": "Driveway Charger"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

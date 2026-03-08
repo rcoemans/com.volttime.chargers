@@ -1,0 +1,46 @@
+{
+  "id": "charger_status_changed",
+  "title": {
+    "en": "Charger status changed",
+    "nl": "Laadstatus gewijzigd"
+  },
+  "titleFormatted": {
+    "en": "Charger status changed",
+    "nl": "Laadstatus gewijzigd"
+  },
+  "hint": {
+    "en": "Fires when the charger status changes.",
+    "nl": "Wordt geactiveerd wanneer de laadstatus wijzigt."
+  },
+  "tokens": [
+    {
+      "name": "old_status",
+      "type": "string",
+      "title": {
+        "en": "Previous status",
+        "nl": "Vorige status"
+      },
+      "example": {
+        "en": "available"
+      }
+    },
+    {
+      "name": "new_status",
+      "type": "string",
+      "title": {
+        "en": "New status",
+        "nl": "Nieuwe status"
+      },
+      "example": {
+        "en": "charging"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}

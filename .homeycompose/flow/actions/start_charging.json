@@ -1,0 +1,22 @@
+{
+  "id": "start_charging",
+  "title": {
+    "en": "Start charging",
+    "nl": "Start laden"
+  },
+  "titleFormatted": {
+    "en": "Start charging",
+    "nl": "Start laden"
+  },
+  "hint": {
+    "en": "Starts a charging session on the charger.",
+    "nl": "Start een laadsessie op de lader."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=source2s"
+    }
+  ]
+}
