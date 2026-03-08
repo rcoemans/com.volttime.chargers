@@ -22,5 +22,8 @@
   },
   "1.2.1": {
     "en": "Fixed the retrieval of some device capabilities values and changed device icon.svg"
+  },
+  "1.2.2": {
+    "en": "Added developer details"
   }
 }
