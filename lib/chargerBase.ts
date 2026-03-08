@@ -241,7 +241,7 @@ export class ChargerBase extends Homey.Device {
         await this.api.startCharging(this.chargerId, this.connectorId);
         this.log('Start charging command sent');
       } else {
-        await this.api.stopCharging(this.chargerId, this.connectorId);
+        await this.api.stopCharging(this.chargerId);
         this.log('Stop charging command sent');
       }
       // Refresh state after a short delay to allow the charger to process
@@ -322,18 +322,22 @@ export class ChargerBase extends Homey.Device {
   private normalizeStatus(status: string | undefined): string {
     if (!status) return 'unknown';
 
-    const normalized = status.toLowerCase().replace(/[\s-]/g, '_');
+    const ocppMap: Record<string, string> = {
+      'available': 'available',
+      'preparing': 'preparing',
+      'charging': 'charging',
+      'suspendedev': 'suspended_ev',
+      'suspended_ev': 'suspended_ev',
+      'suspendedevse': 'suspended_evse',
+      'suspended_evse': 'suspended_evse',
+      'finishing': 'finishing',
+      'reserved': 'reserved',
+      'unavailable': 'unavailable',
+      'faulted': 'faulted',
+    };
 
-    const validStatuses = [
-      'available', 'preparing', 'charging', 'suspended_ev', 'suspended_evse',
-      'finishing', 'reserved', 'unavailable', 'faulted',
-    ];
-
-    if (validStatuses.includes(normalized)) {
-      return normalized;
-    }
-
-    return 'unknown';
+    const key = status.toLowerCase().replace(/[\s_-]/g, '');
+    return ocppMap[key] || ocppMap[status.toLowerCase()] || 'unknown';
   }
 
   private clampValue(value: number | undefined | null, min: number): number {

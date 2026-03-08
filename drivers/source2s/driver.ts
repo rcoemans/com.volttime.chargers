@@ -46,24 +46,31 @@ module.exports = class Source2SDriver extends Homey.Driver {
           throw new Error(t('no_chargers'));
         }
 
-        return chargers.map((charger) => ({
-          name: charger.name || `Volt Time ${charger.model || 'Charger'}`,
-          data: {
-            id: charger.id,
-            token,
-          },
-          settings: {
-            token,
-            connector_id: 1,
-            poll_interval_idle: 60,
-            poll_interval_charging: 10,
-          },
-          store: {
-            model: charger.model || 'Unknown',
-            serial_number: charger.serial_number || '',
-            site_name: charger.site_name || '',
-          },
-        }));
+        return chargers.map((charger) => {
+          const modelName = charger.model
+            ? `${charger.model.vendor} ${charger.model.name}`.trim()
+            : 'Charger';
+          const displayName = charger.reference || charger.identity || modelName;
+
+          return {
+            name: displayName,
+            data: {
+              id: charger.uuid,
+              token,
+            },
+            settings: {
+              token,
+              connector_id: 1,
+              poll_interval_idle: 60,
+              poll_interval_charging: 10,
+            },
+            store: {
+              model: modelName,
+              serial_number: charger.identity || '',
+              site_name: '',
+            },
+          };
+        });
       } catch (err) {
         const message = err instanceof Error ? err.message : String(err);
         this.error(`Failed to list chargers: ${message}`);
