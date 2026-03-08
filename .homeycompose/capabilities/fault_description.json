@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Fault description",
+    "nl": "Storing omschrijving"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/alarm.svg",
+  "insights": false
+}

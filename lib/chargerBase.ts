@@ -134,7 +134,7 @@ export class ChargerBase extends Homey.Device {
 
     // Connector status
     if (status.connector_status) {
-      await this.safeSetCapabilityValue('connector_status', status.connector_status);
+      await this.safeSetCapabilityValue('connector_status', this.normalizeConnectorStatus(status.connector_status));
     }
 
     // On/off (charging state)
@@ -177,6 +177,13 @@ export class ChargerBase extends Homey.Device {
     // Fault alarm
     const hasFault = chargerStatus === 'faulted';
     await this.safeSetCapabilityValue('alarm_fault', hasFault);
+
+    // Fault description
+    if (hasFault && status.fault_description) {
+      await this.safeSetCapabilityValue('fault_description', status.fault_description);
+    } else if (!hasFault) {
+      await this.safeSetCapabilityValue('fault_description', null);
+    }
 
     // Charger health (all OCPP versions — richer with 2.0.1 temperature)
     await this.safeSetCapabilityValue('charger_health', this.isChargerHealthOk());
@@ -485,6 +492,23 @@ export class ChargerBase extends Homey.Device {
     return ocppMap[key] || ocppMap[status.toLowerCase()] || 'unknown';
   }
 
+  private normalizeConnectorStatus(status: string): string {
+    const normalized = this.normalizeStatus(status);
+    const connectorMap: Record<string, string> = {
+      'available': 'disconnected',
+      'preparing': 'connected',
+      'charging': 'locked',
+      'suspended_ev': 'locked',
+      'suspended_evse': 'locked',
+      'finishing': 'connected',
+      'reserved': 'disconnected',
+      'unavailable': 'unknown',
+      'faulted': 'unknown',
+      'unknown': 'unknown',
+    };
+    return connectorMap[normalized] || 'unknown';
+  }
+
   private clampValue(value: number | undefined | null, min: number): number {
     if (value === undefined || value === null || isNaN(value)) return min;
     return Math.max(min, value);
@@ -516,7 +540,7 @@ export class ChargerBase extends Homey.Device {
   }
 
   private async ensureBaseCapabilities(): Promise<void> {
-    const required = ['charger_health'];
+    const required = ['charger_health', 'fault_description'];
     for (const cap of required) {
       if (!this.hasCapability(cap)) {
         await this.addCapability(cap).catch((err) =>
@@ -528,10 +552,19 @@ export class ChargerBase extends Homey.Device {
 
   private async syncOcppCapabilities(versionOverride?: string): Promise<void> {
     const is201 = versionOverride ? versionOverride === '2.0.1' : this.isOcpp201();
+    const defaults: Record<string, unknown> = {
+      'measure_temperature': null,
+      'charging_profile_mode': 'default',
+      'plug_and_charge': false,
+      'charge_schedule_active': false,
+    };
     for (const cap of OCPP_201_CAPABILITIES) {
       if (is201 && !this.hasCapability(cap)) {
         await this.addCapability(cap).catch((err) =>
           this.error(`Failed to add capability ${cap}:`, err));
+        if (defaults[cap] !== undefined && defaults[cap] !== null) {
+          await this.safeSetCapabilityValue(cap, defaults[cap]);
+        }
       } else if (!is201 && this.hasCapability(cap)) {
         await this.removeCapability(cap).catch((err) =>
           this.error(`Failed to remove capability ${cap}:`, err));

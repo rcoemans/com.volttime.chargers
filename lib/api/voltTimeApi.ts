@@ -66,6 +66,7 @@ export interface VoltTimeChargerStatus {
   session_energy?: number;
   current_limit?: number;
   fault?: string;
+  fault_description?: string;
   temperature?: number;
 }
 
@@ -216,8 +217,15 @@ export class VoltTimeApi {
     const currentA = isNaN(l1) ? 0 : l1;
 
     let energyTotal: number | undefined;
+    let sessionEnergy: number | undefined;
+    let voltage: number | undefined;
     let currentLimit: number | undefined;
     let temperature: number | undefined;
+
+    // Voltage fallback from connector max_voltage
+    if (connector?.max_voltage !== null && connector?.max_voltage !== undefined) {
+      voltage = connector.max_voltage;
+    }
 
     try {
       const meter = await this.getLatestMeterValue(chargerUuid, connectorId);
@@ -228,6 +236,26 @@ export class VoltTimeApi {
         const raw = parseFloat(energySample.value);
         if (!isNaN(raw)) {
           energyTotal = (energySample.unit?.toLowerCase() === 'kwh') ? raw : raw / 1000;
+        }
+      }
+
+      const sessionSample = samples.find((s) => s.measurand === 'Energy.Active.Import.Interval');
+      if (sessionSample) {
+        const raw = parseFloat(sessionSample.value);
+        if (!isNaN(raw)) {
+          sessionEnergy = (sessionSample.unit?.toLowerCase() === 'kwh') ? raw : raw / 1000;
+        }
+      }
+
+      const voltageSample = samples.find((s) => s.measurand === 'Voltage' && !s.phase);
+      if (voltageSample) {
+        const v = parseFloat(voltageSample.value);
+        if (!isNaN(v)) voltage = v;
+      } else {
+        const voltageL1 = samples.find((s) => s.measurand === 'Voltage' && s.phase === 'L1-N');
+        if (voltageL1) {
+          const v = parseFloat(voltageL1.value);
+          if (!isNaN(v)) voltage = v;
         }
       }
 
@@ -246,14 +274,22 @@ export class VoltTimeApi {
       /* meter values are optional */
     }
 
+    // Compute voltage from power/current if not available from meter values
+    if (voltage === undefined && powerW > 0 && currentA > 0) {
+      voltage = Math.round(powerW / currentA);
+    }
+
     return {
       status: rawStatus || 'unknown',
       connector_status: connectorStatus,
       power: powerW,
       current: currentA,
+      voltage,
       energy_total: energyTotal,
+      session_energy: sessionEnergy,
       current_limit: currentLimit,
       fault: charger?.error ?? undefined,
+      fault_description: charger?.error_info || charger?.error || undefined,
       temperature,
     };
   }

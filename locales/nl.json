@@ -28,6 +28,8 @@
     "charger_status": "Laadstatus",
     "connector_status": "Connectorstatus",
     "target_charging_current": "Laadstroomlimiet",
-    "meter_session_energy": "Sessie-energie"
+    "meter_session_energy": "Sessie-energie",
+    "charger_health": "Lader in orde",
+    "fault_description": "Storing omschrijving"
   }
 }

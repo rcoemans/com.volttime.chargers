@@ -8,11 +8,11 @@ Functies:
 - Laadstroomlimietschuif (6-32 A): regelt de maximale laadsnelheid naar de lader
 - Sessie-energiemeting (kWh per sessie)
 - Totale geïmporteerde energie voor Homey Energy-integratie
-- Storingsdetectie en meldingen
+- Storingsdetectie, meldingen en storing omschrijving
 - Adaptieve polling: sneller tijdens laden, langzamer wanneer inactief
 - OCPP 1.6J en OCPP 2.0.1 protocolondersteuning (selecteerbaar in apparaatinstellingen)
 - OCPP 2.0.1 extra’s: ladertemperatuur, slimme laadprofielen, Plug & Charge (ISO 15118)
-- 11 basiscapabilities (incl. ladergezondheid dashboard) + 4 OCPP 2.0.1-capabilities (dynamisch toegevoegd/verwijderd)
+- 12 basiscapabilities (incl. lader in orde-indicator en storing omschrijving) + 4 OCPP 2.0.1-capabilities (dynamisch toegevoegd/verwijderd)
 - 11 flow-triggerkaarten: laden gestart/gestopt/gepauzeerd/hervat, status gewijzigd, vermogen gewijzigd, storing gedetecteerd/opgelost, voertuig verbonden/losgekoppeld, laadlimiet gewijzigd
 - 13 flow-conditiekaarten met inversie-ondersteuning (is/is niet)
 - 9 flow-actiekaarten: laden starten/stoppen/wisselen, stroomlimiet instellen/verhogen/verlagen, doelenergie instellen, laadprofiel instellen, verversen
@@ -69,7 +69,7 @@ OCPP-protocolversie:
 
 Dashboard-capabilities (altijd zichtbaar):
 - Laden (aan/uit), Vermogen (W), Stroom (A), Spanning (V), Totale energie (kWh), Sessie-energie (kWh)
-- Laadstatus, Connectorstatus, Storingsalarm, Laadstroomlimiet (schuif), Ladergezondheid
+- Laadstatus, Connectorstatus, Storingsalarm, Storing omschrijving, Laadstroomlimiet (schuif), Lader in orde
 
 Dashboard-capabilities (alleen OCPP 2.0.1, toegevoegd bij selectie):
 - Ladertemperatuur (°C), Laadprofielmodus, Plug & Charge, Smart laden actief

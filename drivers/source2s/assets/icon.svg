@@ -1,22 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Station body outline -->
-  <rect x="28" y="10" width="36" height="68" rx="7" fill="none" stroke="#000" stroke-width="3"/>
-  <!-- Front panel / display -->
-  <rect x="34" y="16" width="24" height="22" rx="3" fill="none" stroke="#000" stroke-width="2"/>
-  <!-- Lightning bolt on display -->
-  <polygon points="50,18.5 44,28 49,28 43,37.5 51,27 46,27" fill="#000"/>
-  <!-- Charging port housing -->
-  <rect x="37" y="46" width="18" height="13" rx="3" fill="none" stroke="#000" stroke-width="2"/>
-  <!-- Two pin holes in port -->
-  <rect x="40" y="49" width="4" height="6" rx="1.5" fill="#000"/>
-  <rect x="48" y="49" width="4" height="6" rx="1.5" fill="#000"/>
-  <!-- Base -->
-  <rect x="20" y="78" width="52" height="7" rx="4" fill="none" stroke="#000" stroke-width="2.5"/>
-  <!-- Charging cable -->
-  <path d="M64 52 Q79 52 79 66" stroke="#000" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <!-- Cable plug body -->
-  <rect x="75" y="65" width="8" height="11" rx="2" fill="none" stroke="#000" stroke-width="2"/>
-  <!-- Plug pins -->
-  <rect x="77" y="68" width="1.5" height="4" rx="0.75" fill="#000"/>
-  <rect x="80.5" y="68" width="1.5" height="4" rx="0.75" fill="#000"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <title>Monochrome car charger icon</title>
+  <desc>Centered monochrome black outline of a wall-mounted EV charger with front socket flap.</desc>
+  <g transform="translate(0,10)" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
+
+    <path d="
+      M500 120
+      L570 150
+      L625 210
+      L650 310
+      L635 420
+      L625 520
+      L610 690
+      L585 820
+      L500 850
+      L415 820
+      L390 690
+      L375 520
+      L365 420
+      L350 310
+      L375 210
+      L430 150
+      Z"
+      stroke-width="10"/>
+
+    <path d="M500 120 L500 305" stroke-width="7"/>
+    <path d="M430 150 L405 308 L375 420" stroke-width="6"/>
+    <path d="M570 150 L595 308 L625 420" stroke-width="6"/>
+    <path d="M405 308 L500 360 L595 308" stroke-width="6"/>
+
+    <path d="M500 178 L500 272" stroke-width="12"/>
+
+    <circle cx="500" cy="378" r="4" stroke-width="3"/>
+    <path d="M492 378a8 8 0 0 1 16 0" stroke-width="2.5"/>
+    <path d="M488 378a12 12 0 0 1 24 0" stroke-width="2"/>
+
+    <g transform="translate(500,640)">
+      <circle cx="0" cy="0" r="82" stroke-width="8"/>
+      <circle cx="0" cy="0" r="56" stroke-width="4"/>
+      <path d="M-22 -78 L-22 -98 L22 -98 L22 -78" stroke-width="8"/>
+      <path d="M-72 -32 A79 79 0 0 0 -72 32" stroke-width="10"/>
+      <path d="M72 -32 A79 79 0 0 1 72 32" stroke-width="10"/>
+      <path d="M-12 76 Q0 96 12 76" stroke-width="8"/>
+    </g>
+
+    <path d="M392 690 L500 735 L608 690" stroke-width="5"/>
+  </g>
 </svg>

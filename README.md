@@ -121,13 +121,15 @@ The **Charging current limit** slider (6–32 A) sets the maximum charging curre
 | `alarm_fault`              | boolean | Charger fault active                 | Both    | ✓         |
 | `target_charging_current`  | number  | Charging current limit (A) — slider  | Both    |           |
 | `meter_session_energy`     | number  | Current session energy (kWh)         | Both    | ✓         |
-| `charger_health`           | boolean | Charger health OK (no faults, safe temp) | Both | ✓        |
+| `charger_health`           | boolean | Charger OK (no faults, safe temp)    | Both    | ✓         |
+| `fault_description`        | string  | Fault description (when faulted)     | Both    |           |
 | `measure_temperature`      | number  | Charger temperature (°C)             | 2.0.1   | ✓         |
 | `charging_profile_mode`    | enum    | Charging profile (default/smart/scheduled) | 2.0.1 | ✓     |
 | `plug_and_charge`          | boolean | Plug & Charge (ISO 15118) active     | 2.0.1   | ✓         |
 | `charge_schedule_active`   | boolean | Smart charging schedule active       | 2.0.1   | ✓         |
 
-> - **`charger_health`** is a base capability visible on the dashboard for all OCPP versions. With OCPP 1.6J it checks for faults only; with OCPP 2.0.1 it also verifies charger temperature is within safe range.
+> - **`charger_health`** ("Charger OK" / "Lader in orde") is a base capability visible on the dashboard for all OCPP versions. Shows **Yes/No** — with OCPP 1.6J it checks for faults only; with OCPP 2.0.1 it also verifies charger temperature is within safe range.
+> - **`fault_description`** shows the fault text when the charger is in a faulted state, and clears automatically when the fault is resolved.
 > - **OCPP 2.0.1 capabilities** are automatically added to the dashboard when you select OCPP 2.0.1 in device settings, and removed when you switch back to OCPP 1.6J.
 
 ## Charger Status Values

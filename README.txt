@@ -8,11 +8,11 @@ Features:
 - Charging current limit slider (6-32 A): controls maximum charging speed sent to the charger
 - Session energy tracking (kWh per session)
 - Total imported energy for Homey Energy integration
-- Fault detection and alerting
+- Fault detection, alerting, and fault description display
 - Adaptive polling: faster during charging, slower when idle
 - OCPP 1.6J and OCPP 2.0.1 protocol support (selectable in device settings)
 - OCPP 2.0.1 extras: charger temperature, smart charging profiles, Plug & Charge (ISO 15118)
-- 11 base capabilities (incl. charger health dashboard) + 4 OCPP 2.0.1 capabilities (dynamically added/removed)
+- 12 base capabilities (incl. charger OK indicator and fault description) + 4 OCPP 2.0.1 capabilities (dynamically added/removed)
 - 11 flow trigger cards: charging started/stopped/paused/resumed, status changed, power changed, fault detected/cleared, vehicle connected/disconnected, charge limit changed
 - 13 flow condition cards with inversion support (is/is not)
 - 9 flow action cards: start/stop/toggle charging, set/increase/decrease current limit, set target energy, set charging profile, refresh
@@ -69,7 +69,7 @@ OCPP protocol version:
 
 Device dashboard capabilities (always visible):
 - Charging (on/off), Power (W), Current (A), Voltage (V), Total energy (kWh), Session energy (kWh)
-- Charger status, Connector status, Fault alarm, Charging current limit (slider), Charger health
+- Charger status, Connector status, Fault alarm, Fault description, Charging current limit (slider), Charger OK
 
 Device dashboard capabilities (OCPP 2.0.1 only, added when selected):
 - Charger temperature (°C), Charging profile mode, Plug & Charge, Smart charging active

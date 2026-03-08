@@ -1,8 +1,8 @@
 {
   "type": "boolean",
   "title": {
-    "en": "Charger health",
-    "nl": "Ladergezondheid"
+    "en": "Charger OK",
+    "nl": "Lader in orde"
   },
   "getable": true,
   "setable": false,

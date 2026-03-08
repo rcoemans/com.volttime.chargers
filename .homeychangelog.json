@@ -1,4 +1,8 @@
 {
+  "1.2.0": {
+    "en": "Fixed dashboard capabilities not showing values: voltage, connector status, session energy, charger temperature, charging profile, Plug & Charge, smart charging active. Renamed 'Charger health' to 'Charger OK' for clarity. Added 'Fault description' capability showing fault details when a charger fault is active.",
+    "nl": "Dashboard-capabilities tonen nu waarden: spanning, connectorstatus, sessie-energie, ladertemperatuur, laadprofiel, Plug & Charge, smart laden actief. 'Ladergezondheid' hernoemd naar 'Lader in orde' voor duidelijkheid. 'Storing omschrijving' capability toegevoegd die storingsdetails toont bij een actieve storing."
+  },
   "1.0.1": {
     "en": "Lowered minimum compatibility to support more Homey firmware versions and improve local installation compatibility.",
     "nl": "Minimale compatibiliteit verlaagd om meer Homey-firmwareversies te ondersteunen en lokale installatiecompatibiliteit te verbeteren."

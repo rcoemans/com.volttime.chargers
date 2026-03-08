@@ -28,6 +28,8 @@
     "charger_status": "Charger status",
     "connector_status": "Connector status",
     "target_charging_current": "Charging current limit",
-    "meter_session_energy": "Session energy"
+    "meter_session_energy": "Session energy",
+    "charger_health": "Charger OK",
+    "fault_description": "Fault description"
   }
 }

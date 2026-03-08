@@ -15,7 +15,8 @@
     "alarm_fault",
     "target_charging_current",
     "meter_session_energy",
-    "charger_health"
+    "charger_health",
+    "fault_description"
   ],
   "capabilitiesOptions": {
     "onoff": {
@@ -70,8 +71,14 @@
     },
     "charger_health": {
       "title": {
-        "en": "Charger health",
-        "nl": "Ladergezondheid"
+        "en": "Charger OK",
+        "nl": "Lader in orde"
+      }
+    },
+    "fault_description": {
+      "title": {
+        "en": "Fault description",
+        "nl": "Storing omschrijving"
       }
     }
   },
