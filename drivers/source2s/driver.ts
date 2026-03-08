@@ -23,10 +23,12 @@ module.exports = class Source2SDriver extends Homey.Driver {
       }
 
       api = new VoltTimeApi(token);
-      const valid = await api.validateToken();
-
-      if (!valid) {
-        throw new Error(t('invalid_token'));
+      try {
+        await api.validateToken();
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : String(err);
+        this.error(`Token validation failed: ${msg}`);
+        throw new Error(`${t('invalid_token')} (${msg})`);
       }
 
       return true;

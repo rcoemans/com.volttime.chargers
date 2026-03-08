@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 24px 20px;
+      color: #1a1a1a;
+      background: #fff;
+    }
+    h2 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: #333;
+    }
+    input[type="password"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d0d0d0;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    input[type="password"]:focus {
+      border-color: #3a9d8f;
+    }
+    .hint {
+      font-size: 11px;
+      color: #888;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+    .error {
+      color: #d9534f;
+      font-size: 12px;
+      margin-top: 10px;
+      display: none;
+      padding: 8px 10px;
+      background: #fff2f2;
+      border-radius: 6px;
+      border: 1px solid #f5c6c6;
+    }
+  </style>
+</head>
+<body>
+  <h2 id="label-title">Connect to Plugchoice</h2>
+  <p class="subtitle" id="label-subtitle">Enter your Personal Access Token to discover your chargers.</p>
+
+  <label for="token" id="label-token">Personal Access Token</label>
+  <input type="password" id="token" autocomplete="off" spellcheck="false" />
+  <p class="hint" id="label-hint">
+    Get your token at app.plugchoice.com → click your name bottom-left → Account Settings → API Tokens
+  </p>
+  <p class="error" id="error-msg"></p>
+
+  <script>
+    function onShowView() {
+      Homey.setTitle('');
+      document.getElementById('token').focus();
+    }
+
+    async function onNextView() {
+      var token = document.getElementById('token').value.trim();
+      var errorEl = document.getElementById('error-msg');
+      errorEl.style.display = 'none';
+
+      if (!token) {
+        errorEl.textContent = Homey.__('pair.errors.enter_token') || 'Please enter a Personal Access Token.';
+        errorEl.style.display = 'block';
+        throw new Error('No token entered');
+      }
+
+      try {
+        var result = await Homey.emit('login', { username: token, password: '' });
+        if (!result) throw new Error(Homey.__('pair.errors.invalid_token') || 'Invalid or expired token.');
+      } catch (err) {
+        errorEl.textContent = err.message || Homey.__('pair.errors.invalid_token');
+        errorEl.style.display = 'block';
+        throw err;
+      }
+    }
+  </script>
+</body>
+</html>

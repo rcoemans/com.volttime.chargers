@@ -47,36 +47,34 @@ homey app install
 
 1. Install the app on your Homey.
 2. Add a new device: **Volt Time Chargers → Source 2S**.
-3. Obtain your Volt Time API token (see **How to obtain a Volt Time API token** below).
+3. Obtain your Plugchoice API token (see **How to obtain your Plugchoice API token** below).
 4. Select your charger from the discovered list.
 5. The device will connect automatically and start reading data.
 6. You can change connection settings later in the device **Settings** page.
 
-## How to obtain a Volt Time API token
+## How to obtain your Plugchoice API token
 
-To connect your Volt Time charger to this Homey app, you need to create an API token in your Volt Time account.
+To connect your charger to this Homey app, you need to create an API token in your Plugchoice account.
 
-### Step 1 — Log in to Volt Time
+### Step 1 — Log in to Plugchoice
 
-- Open the Volt Time web portal: [https://app.volttime.com](https://app.volttime.com)
-- Log in with your Volt Time account.
+- Open the Plugchoice web portal: [https://app.plugchoice.com](https://app.plugchoice.com)
+- Sign in with your Volt Time / Plugchoice account.
 
-### Step 2 — Open your account settings
+### Step 2 — Open account settings
 
-- Click your profile icon in the top-right corner.
-- Select **Account Settings**.
+- Click your name in the bottom-left corner.
+- Open your account/profile settings.
 
-### Step 3 — Create an API token
+### Step 3 — Create a token
 
-- Navigate to the **API Tokens** section.
-- Click **Create Token**.
-- Give the token a name, for example: `Homey Integration`.
-- Confirm the creation of the token.
+- Go to the **API Tokens** section in your profile settings.
+- Create a new API token / Personal Access Token.
 
 ### Step 4 — Copy the token
 
-- After creating the token, Volt Time will show a long string (for example: `vt_3f7a2b8e9c1d4e6f...`).
-- ⚠️ Copy this token immediately. It may only be shown once.
+- Copy the generated token value.
+- ⚠️ Copy this token immediately if shown only once.
 
 ### Step 5 — Enter the token in Homey
 
@@ -84,7 +82,10 @@ To connect your Volt Time charger to this Homey app, you need to create an API t
 - Paste the token into the API Token field.
 - Save the settings.
 
-The app will now connect to your Volt Time account and automatically discover your chargers.
+The app uses this value as a Bearer token and will automatically discover your chargers.
+
+**Short UI help text:**
+Create your token in Plugchoice Web Portal -> click your name bottom-left -> Account Settings -> API Tokens.
 
 ## Device Variables
 

@@ -754,31 +754,7 @@
       },
       "pair": [
         {
-          "id": "login_credentials",
-          "template": "login_credentials",
-          "options": {
-            "title": {
-              "en": "Connect to Volt Time Cloud",
-              "nl": "Verbind met Volt Time Cloud"
-            },
-            "logo": "../assets/icon.svg",
-            "usernameLabel": {
-              "en": "Personal Access Token",
-              "nl": "Personal Access Token"
-            },
-            "usernamePlaceholder": {
-              "en": "Paste your token here",
-              "nl": "Plak hier uw token"
-            },
-            "passwordLabel": {
-              "en": " ",
-              "nl": " "
-            },
-            "passwordPlaceholder": {
-              "en": " ",
-              "nl": " "
-            }
-          }
+          "id": "login_token"
         },
         {
           "id": "list_devices",

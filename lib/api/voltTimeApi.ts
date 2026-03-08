@@ -2,7 +2,7 @@
 
 import https from 'https';
 
-const API_BASE_URL = 'https://api.volttime.com';
+const API_BASE_URL = 'https://api.plugchoice.com';
 
 export interface VoltTimeCharger {
   id: string;
@@ -162,12 +162,7 @@ export class VoltTimeApi {
     });
   }
 
-  async validateToken(): Promise<boolean> {
-    try {
-      await this.getChargers();
-      return true;
-    } catch {
-      return false;
-    }
+  async validateToken(): Promise<void> {
+    await this.getChargers();
   }
 }
