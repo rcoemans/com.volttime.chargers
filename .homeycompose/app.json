@@ -1,6 +1,6 @@
 {
   "id": "com.volttime.chargers",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "compatibility": ">=10.0.0",
   "sdk": 3,
   "platforms": [

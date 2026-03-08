@@ -9,5 +9,8 @@
   },
   "1.0.2": {
     "en": "Bug fixes applied to API connectivity"
+  },
+  "1.1.1": {
+    "en": "Added device capabilities to device dashboard"
   }
 }
