@@ -19,5 +19,8 @@
   },
   "1.1.2": {
     "en": "Bug fix"
+  },
+  "1.2.1": {
+    "en": "Fixed the retrieval of some device capabilities values and changed device icon.svg"
   }
 }
