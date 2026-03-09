@@ -1,5 +1,3 @@
-Bedien en monitor Volt Time EV-laders met Volt Time Cloud of OCPP.
-
 Functies:
 - Real-time laadgegevens: vermogen (W), stroom (A), spanning (V), energie (kWh)
 - Monitoring van laadstatus: beschikbaar, voorbereiden, laden, onderbroken, afronden, storing
@@ -11,11 +9,7 @@ Functies:
 - Storingsdetectie, meldingen en storing omschrijving
 - Adaptieve polling: sneller tijdens laden, langzamer wanneer inactief
 - OCPP 1.6J en OCPP 2.0.1 protocolondersteuning (selecteerbaar in apparaatinstellingen)
-- OCPP 2.0.1 extra’s: ladertemperatuur, slimme laadprofielen, Plug & Charge (ISO 15118)
-- 12 basiscapabilities (incl. lader in orde-indicator en storing omschrijving) + 4 OCPP 2.0.1-capabilities (dynamisch toegevoegd/verwijderd)
-- 11 flow-triggerkaarten: laden gestart/gestopt/gepauzeerd/hervat, status gewijzigd, vermogen gewijzigd, storing gedetecteerd/opgelost, voertuig verbonden/losgekoppeld, laadlimiet gewijzigd
-- 13 flow-conditiekaarten met inversie-ondersteuning (is/is niet)
-- 9 flow-actiekaarten: laden starten/stoppen/wisselen, stroomlimiet instellen/verhogen/verlagen, doelenergie instellen, laadprofiel instellen, verversen
+- OCPP 2.0.1 extra's: ladertemperatuur, slimme laadprofielen, Plug & Charge (ISO 15118)
 - Volledig gelokaliseerd in Engels en Nederlands
 
 Ondersteunde apparaten:
@@ -73,32 +67,6 @@ Dashboard-capabilities (altijd zichtbaar):
 
 Dashboard-capabilities (alleen OCPP 2.0.1, toegevoegd bij selectie):
 - Ladertemperatuur (°C), Laadprofielmodus, Plug & Charge, Smart laden actief
-
-Flow-kaarten - Voorwaarden:
-- Lader laadt/laadt niet
-- Voertuig is/is niet verbonden
-- Lader heeft/heeft geen storing
-- Lader is/is niet beschikbaar (inactief en gereed)
-- Laadstatus is/is niet [status]
-- Vermogen is/is niet [operator] [waarde] W
-- Laadstroom is/is niet [operator] [waarde] A
-- Laadlimiet is/is niet [operator] [waarde] A
-- Spanning is/is niet [operator] [waarde] V
-- Sessie-energie is/is niet [operator] [waarde] kWh
-- Ladertemperatuur is/is niet [operator] [waarde] °C (OCPP 2.0.1)
-- Smart laden is/is niet actief (OCPP 2.0.1)
-- Ladergezondheid is/is niet OK
-
-Flow-kaarten - Acties:
-- Laden starten
-- Laden stoppen
-- Laden aan/uit schakelen
-- Stroomlimiet instellen op [waarde] A
-- Stroomlimiet verhogen met [waarde] A
-- Stroomlimiet verlagen met [waarde] A
-- Laden stoppen na [waarde] kWh (doelenergie)
-- Laadprofielmodus instellen (OCPP 2.0.1): standaard / smart / gepland
-- Ladergegevens nu verversen
 
 Bekende beperkingen:
 - Vereist internetverbinding (Volt Time Cloud API)

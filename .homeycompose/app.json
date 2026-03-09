@@ -11,8 +11,8 @@
     "nl": "Volt Time Laders"
   },
   "description": {
-    "en": "Control and monitor Volt Time EV chargers using Volt Time Cloud or OCPP.",
-    "nl": "Bedien en monitor Volt Time EV-laders met Volt Time Cloud of OCPP."
+    "en": "Smart EV charging automation for your Volt Time charger.",
+    "nl": "Slimme EV-laadautomatisering voor je Volt Time lader."
   },
   "brandColor": "#3a9d8f",
   "category": [

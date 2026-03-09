@@ -1,5 +1,3 @@
-Control and monitor Volt Time EV chargers using Volt Time Cloud or OCPP.
-
 Features:
 - Real-time charging data: power (W), current (A), voltage (V), energy (kWh)
 - Charger status monitoring: available, preparing, charging, suspended, finishing, faulted
@@ -12,10 +10,6 @@ Features:
 - Adaptive polling: faster during charging, slower when idle
 - OCPP 1.6J and OCPP 2.0.1 protocol support (selectable in device settings)
 - OCPP 2.0.1 extras: charger temperature, smart charging profiles, Plug & Charge (ISO 15118)
-- 12 base capabilities (incl. charger OK indicator and fault description) + 4 OCPP 2.0.1 capabilities (dynamically added/removed)
-- 11 flow trigger cards: charging started/stopped/paused/resumed, status changed, power changed, fault detected/cleared, vehicle connected/disconnected, charge limit changed
-- 13 flow condition cards with inversion support (is/is not)
-- 9 flow action cards: start/stop/toggle charging, set/increase/decrease current limit, set target energy, set charging profile, refresh
 - Fully localized in English and Dutch (Nederlands)
 
 Supported devices:
@@ -73,32 +67,6 @@ Device dashboard capabilities (always visible):
 
 Device dashboard capabilities (OCPP 2.0.1 only, added when selected):
 - Charger temperature (°C), Charging profile mode, Plug & Charge, Smart charging active
-
-Flow cards - Conditions:
-- Charger is/is not charging
-- Vehicle is/is not connected
-- Charger has/has no fault
-- Charger is/is not available (idle and ready)
-- Charger status is/is not [status]
-- Power is/is not [operator] [value] W
-- Charging current is/is not [operator] [value] A
-- Charge limit is/is not [operator] [value] A
-- Voltage is/is not [operator] [value] V
-- Session energy is/is not [operator] [value] kWh
-- Charger temperature is/is not [operator] [value] °C (OCPP 2.0.1)
-- Smart charging is/is not active (OCPP 2.0.1)
-- Charger health is/is not OK
-
-Flow cards - Actions:
-- Start charging
-- Stop charging
-- Toggle charging on/off
-- Set current limit to [value] A
-- Increase current limit by [value] A
-- Decrease current limit by [value] A
-- Stop charging after [value] kWh (target energy)
-- Set charging profile mode (OCPP 2.0.1): default / smart / scheduled
-- Refresh charger data now
 
 Known limitations:
 - Requires internet connection (Volt Time Cloud API)
