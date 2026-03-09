@@ -28,5 +28,8 @@
   },
   "1.2.3": {
     "en": "Added developer details"
+  },
+  "1.2.4": {
+    "en": "Updated the app tagline to Smart EV charging automation for your Volt Time charger. Simplified documentation by removing duplicated descriptions and Flow Card sections from README.md, README.txt, and README.nl.txt so they align with Homey App Store guidelines. Updated the driver icon to comply with Homey design requirements by using a 50×50 viewBox with a consistent stroke-width and a simplified EV charger outline."
   }
 }
